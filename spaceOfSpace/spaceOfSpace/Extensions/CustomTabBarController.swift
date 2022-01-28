@@ -1,10 +1,3 @@
-//
-//  CustomTabBarController.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 27.03.2021.
-//
-
 import UIKit
 
 class CustomTabBarController: UITabBarController {
@@ -78,7 +71,7 @@ class CustomTabBarController: UITabBarController {
         navigationVC.navigationBar.isTranslucent = false
         navigationVC.navigationBar.prefersLargeTitles = true
         navigationVC.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        
+
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = UIColor(red: 0.114, green: 0.114, blue: 0.114, alpha: 0.94)
         navigationVC.navigationBar.standardAppearance = appearance

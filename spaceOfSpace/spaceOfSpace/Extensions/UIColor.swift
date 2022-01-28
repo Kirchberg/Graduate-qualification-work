@@ -1,10 +1,3 @@
-//
-//  UIColor.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 27.03.2021.
-//
-
 import UIKit
 
 extension UIColor {

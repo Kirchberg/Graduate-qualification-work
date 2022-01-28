@@ -1,10 +1,3 @@
-//
-//  UIImage.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 07.04.2021.
-//
-
 import UIKit
 
 let imageCache = NSCache<NSString, UIImage>()

@@ -1,10 +1,3 @@
-//
-//  UITableView.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 31.03.2021.
-//
-
 import UIKit
 
 extension UITableView {

@@ -1,10 +1,3 @@
-//
-//  SpaceLibraryCategoriesTestData.swift
-//  spaceOfSpace
-//
-//  Created by Aleksandr Dergachev on 11.04.2021.
-//
-
 import Foundation
 
 let testCategories: [SpaceLibraryCategory] = [

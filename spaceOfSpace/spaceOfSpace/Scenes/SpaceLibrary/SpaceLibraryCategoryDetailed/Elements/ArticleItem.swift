@@ -1,10 +1,3 @@
-//
-//  ArticleItem.swift
-//  spaceOfSpace
-//
-//  Created by Aleksandr Dergachev on 12.04.2021.
-//
-
 import UIKit
 
 class ArticleItem: UITableViewCell {

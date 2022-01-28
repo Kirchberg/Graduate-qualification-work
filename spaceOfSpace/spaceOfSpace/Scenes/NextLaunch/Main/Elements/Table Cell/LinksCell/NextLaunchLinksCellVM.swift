@@ -1,10 +1,3 @@
-//
-//  NextLaunchLinksCellVM.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 13.05.2021.
-//
-
 import UIKit
 
 class NextLaunchLinksCellVM: NextLaunchCellVMProtocol {
