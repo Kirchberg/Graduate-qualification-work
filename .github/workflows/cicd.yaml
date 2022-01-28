@@ -1,0 +1,20 @@
+name: "Build Project And Run Tests"
+on: pull_request
+
+jobs:
+  build:
+   runs-on: macos-latest
+   steps:
+      - name: Cancel previous jobs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+      - name: Install Pods
+        working-directory: ./spaceOfSpace
+        run: | 
+          pod deintegrate
+          pod install
+      - name: Build
+        working-directory: ./spaceOfSpace
+        run: xcodebuild -workspace spaceOfSpace.xcworkspace -scheme spaceOfSpace CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED="NO" CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO"
