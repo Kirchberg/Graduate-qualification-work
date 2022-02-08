@@ -1,10 +1,3 @@
-//
-//  TitleItem.swift
-//  spaceOfSpace
-//
-//  Created by Aleksandr Dergachev on 19.05.2021.
-//
-
 import UIKit
 
 class TitleItem: UITableViewCell {

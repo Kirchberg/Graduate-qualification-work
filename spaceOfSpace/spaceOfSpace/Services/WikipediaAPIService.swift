@@ -1,13 +1,3 @@
-//
-//  WikipediaAPIService.swift
-//  spaceOfSpace
-//
-//  Created by Aleksandr Dergachev on 20.04.2021.
-//
-//  https://en.wikipedia.org/w/api.php?action=query&format=json&list=categorymembers&cmtitle=Category%3AAstronomical_objects_known_since_antiquity&cmtype=subcat
-//  https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&titles=Earth&piprop=original
-//  https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cextracts&titles=Earth&piprop=original&explaintext=1
-
 import Alamofire
 import SwiftyJSON
 import Foundation

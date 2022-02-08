@@ -1,10 +1,3 @@
-//
-//  NewsWebConfigurator.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 04.04.2021.
-//
-
 import UIKit
 
 class NewsWebConfigurator {

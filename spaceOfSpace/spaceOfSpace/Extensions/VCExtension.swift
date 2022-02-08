@@ -1,10 +1,3 @@
-//
-//  VCExtension.swift
-//  spaceOfSpace
-//
-//  Created by Daniil Tchyorny on 10.04.2021.
-//
-
 import UIKit
 
 extension UIViewController {

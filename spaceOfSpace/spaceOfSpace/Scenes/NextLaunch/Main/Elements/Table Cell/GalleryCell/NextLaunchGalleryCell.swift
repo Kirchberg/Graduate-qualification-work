@@ -1,10 +1,3 @@
-//
-//  NextLaunchGalleryCellVM.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 28.05.2021.
-//
-
 import UIKit
 
 class NextLaunchGalleryCell: UITableViewCell, CellProtocol {

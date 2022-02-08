@@ -1,9 +1,3 @@
-//
-//  CollectionConfig.swift
-//  spaceOfSpace
-//
-//  Created by Daniil Tchyorny on 10.04.2021.
-//
 import Foundation
 struct ConfigCollection {
     var sizeOfFirstCell:Int

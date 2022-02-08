@@ -28,11 +28,9 @@
 		280B35C3262417A700725B24 /* ApodModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B35C2262417A700725B24 /* ApodModels.swift */; };
 		280B35C6262417B600725B24 /* ApodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B35C5262417B600725B24 /* ApodViewController.swift */; };
 		280B35C9262417C700725B24 /* ApodInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B35C8262417C700725B24 /* ApodInteractor.swift */; };
-		280B35D026242E1200725B24 /* SolARSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280B35CF26242E1200725B24 /* SolARSceneController.swift */; };
 		2819890A262A08E300C6B24D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28198909262A08E300C6B24D /* UIImage.swift */; };
 		2819890D262AB7C300C6B24D /* SetupApodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819890C262AB7C300C6B24D /* SetupApodDetailsView.swift */; };
 		28198910262ABE9400C6B24D /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819890F262ABE9400C6B24D /* DescriptionView.swift */; };
-		281C186B26375A06001B46D1 /* SystemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C186A26375A06001B46D1 /* SystemManager.swift */; };
 		281C187126375A25001B46D1 /* PlanetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C187026375A25001B46D1 /* PlanetManager.swift */; };
 		281C187D26375A72001B46D1 /* CollectionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C187C26375A72001B46D1 /* CollectionConfig.swift */; };
 		28286C28261F277D002AA212 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28286C27261F277D002AA212 /* DrawerController.swift */; };
@@ -57,12 +55,6 @@
 		2892034B262E16E1005719DF /* RIFTS.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 28920347262E16DE005719DF /* RIFTS.intentdefinition */; };
 		2892034C262E16E1005719DF /* RIFTS.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 28920347262E16DE005719DF /* RIFTS.intentdefinition */; };
 		2892034F262E16E1005719DF /* RIFTSExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2892033F262E16DE005719DF /* RIFTSExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2893F56D262EDD0300B916AE /* MWPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893F56C262EDD0300B916AE /* MWPresenter.swift */; };
-		2893F573262EDD0F00B916AE /* MWWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893F572262EDD0F00B916AE /* MWWorker.swift */; };
-		2893F577262EDD1B00B916AE /* MWRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893F576262EDD1B00B916AE /* MWRouter.swift */; };
-		2893F57B262EDD2900B916AE /* MWModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893F57A262EDD2900B916AE /* MWModels.swift */; };
-		2893F57F262EDD7400B916AE /* MWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893F57E262EDD7400B916AE /* MWViewController.swift */; };
-		2893F583262EDDA700B916AE /* MWInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893F582262EDDA700B916AE /* MWInteractor.swift */; };
 		289532122629C88300C37D90 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289532112629C88300C37D90 /* ImageView.swift */; };
 		28BE0E0B26178E9700CE876E /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BE0E0A26178E9700CE876E /* Components.swift */; };
 		28F8DF7826221B2600D92E0A /* VCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F8DF7726221B2600D92E0A /* VCExtension.swift */; };
@@ -237,11 +229,9 @@
 		280B35C2262417A700725B24 /* ApodModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodModels.swift; sourceTree = "<group>"; };
 		280B35C5262417B600725B24 /* ApodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodViewController.swift; sourceTree = "<group>"; };
 		280B35C8262417C700725B24 /* ApodInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodInteractor.swift; sourceTree = "<group>"; };
-		280B35CF26242E1200725B24 /* SolARSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolARSceneController.swift; sourceTree = "<group>"; };
 		28198909262A08E300C6B24D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		2819890C262AB7C300C6B24D /* SetupApodDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupApodDetailsView.swift; sourceTree = "<group>"; };
 		2819890F262ABE9400C6B24D /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
-		281C186A26375A06001B46D1 /* SystemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemManager.swift; sourceTree = "<group>"; };
 		281C187026375A25001B46D1 /* PlanetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetManager.swift; sourceTree = "<group>"; };
 		281C187C26375A72001B46D1 /* CollectionConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionConfig.swift; sourceTree = "<group>"; };
 		28286C27261F277D002AA212 /* DrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
@@ -270,12 +260,6 @@
 		28920357262E186D005719DF /* RIFTSExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RIFTSExtensionRelease.entitlements; sourceTree = "<group>"; };
 		2892035A262E1AA5005719DF /* spaceOfSpaceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = spaceOfSpaceDebug.entitlements; sourceTree = "<group>"; };
 		2892035D262E1AAF005719DF /* RIFTSExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RIFTSExtensionDebug.entitlements; sourceTree = "<group>"; };
-		2893F56C262EDD0300B916AE /* MWPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWPresenter.swift; sourceTree = "<group>"; };
-		2893F572262EDD0F00B916AE /* MWWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWWorker.swift; sourceTree = "<group>"; };
-		2893F576262EDD1B00B916AE /* MWRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWRouter.swift; sourceTree = "<group>"; };
-		2893F57A262EDD2900B916AE /* MWModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWModels.swift; sourceTree = "<group>"; };
-		2893F57E262EDD7400B916AE /* MWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWViewController.swift; sourceTree = "<group>"; };
-		2893F582262EDDA700B916AE /* MWInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWInteractor.swift; sourceTree = "<group>"; };
 		289532112629C88300C37D90 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		28BE0E0A26178E9700CE876E /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		28F8DF7726221B2600D92E0A /* VCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCExtension.swift; sourceTree = "<group>"; };
@@ -461,7 +445,6 @@
 		281C1869263759ED001B46D1 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				281C186A26375A06001B46D1 /* SystemManager.swift */,
 				281C187026375A25001B46D1 /* PlanetManager.swift */,
 			);
 			path = Managers;
@@ -527,19 +510,6 @@
 			path = RIFTS;
 			sourceTree = "<group>";
 		};
-		2893F56B262EDCCB00B916AE /* MarsWeather */ = {
-			isa = PBXGroup;
-			children = (
-				2893F56C262EDD0300B916AE /* MWPresenter.swift */,
-				2893F572262EDD0F00B916AE /* MWWorker.swift */,
-				2893F576262EDD1B00B916AE /* MWRouter.swift */,
-				2893F57A262EDD2900B916AE /* MWModels.swift */,
-				2893F57E262EDD7400B916AE /* MWViewController.swift */,
-				2893F582262EDDA700B916AE /* MWInteractor.swift */,
-			);
-			path = MarsWeather;
-			sourceTree = "<group>";
-		};
 		289531EA2629AAE400C37D90 /* APOD */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,7 +537,6 @@
 		28E4C6A32636D2D900F1D9AF /* SceneController */ = {
 			isa = PBXGroup;
 			children = (
-				280B35CF26242E1200725B24 /* SolARSceneController.swift */,
 				2853CC0F261607D9003BDB69 /* SceneController.swift */,
 			);
 			path = SceneController;
@@ -626,7 +595,6 @@
 		4219F5DE2618D286006BE629 /* Web Browser */ = {
 			isa = PBXGroup;
 			children = (
-				4219F5EC2618D346006BE629 /* Elements */,
 				4219F609261A30A9006BE629 /* NewsWebConfigurator.swift */,
 				4219F5DF2618D2DA006BE629 /* NewsWebPresenter.swift */,
 				4219F604261A1265006BE629 /* NewsWebWorker.swift */,
@@ -636,13 +604,6 @@
 				4219F5E42618D2DA006BE629 /* NewsWebInteractor.swift */,
 			);
 			path = "Web Browser";
-			sourceTree = "<group>";
-		};
-		4219F5EC2618D346006BE629 /* Elements */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Elements;
 			sourceTree = "<group>";
 		};
 		42230FF2264AB6E400DB5990 /* Table Cell */ = {
@@ -810,7 +771,6 @@
 			isa = PBXGroup;
 			children = (
 				428B2E66264565EC00C416DD /* SolarSystem */,
-				2893F56B262EDCCB00B916AE /* MarsWeather */,
 				289531EA2629AAE400C37D90 /* APOD */,
 				2853CBF82615FF0C003BDB69 /* ArPlanet */,
 				4239E361260F2F6100375F6D /* Elements */,
@@ -1236,7 +1196,6 @@
 				42FA9DDA261DADAE003B9D62 /* UIView.swift in Sources */,
 				428B2E8D264568C000C416DD /* VirtualObjectInteraction.swift in Sources */,
 				4230ADF826BC15D000A80DAD /* NetworkMockModel.swift in Sources */,
-				2893F577262EDD1B00B916AE /* MWRouter.swift in Sources */,
 				428B2E6E2645662600C416DD /* SolarSystemWorker.swift in Sources */,
 				82248ADF2658174B00119DB3 /* SpaceLibraryCategoriesInteractor.swift in Sources */,
 				280B35C3262417A700725B24 /* ApodModels.swift in Sources */,
@@ -1254,7 +1213,6 @@
 				424F147C265D880100CAD0F3 /* NLWebBrowserInteractorProtocol.swift in Sources */,
 				428B2E6F2645662600C416DD /* SolarSystemRouter.swift in Sources */,
 				428B2E802645680900C416DD /* Constraints + Button Actions.swift in Sources */,
-				281C186B26375A06001B46D1 /* SystemManager.swift in Sources */,
 				4239E359260F2C5400375F6D /* ServicesRouter.swift in Sources */,
 				4257786F264D6CEB00299E9A /* NextLaunchInfoCell.swift in Sources */,
 				42230FDC264A98AB00DB5990 /* NextLaunchAPIService.swift in Sources */,
@@ -1270,7 +1228,6 @@
 				280B35C02624179C00725B24 /* ApodRouter.swift in Sources */,
 				28F8DF7E262224CB00D92E0A /* NotchVC.swift in Sources */,
 				4239E35A260F2C5400375F6D /* ServicesModels.swift in Sources */,
-				2893F573262EDD0F00B916AE /* MWWorker.swift in Sources */,
 				82248AF626581B4E00119DB3 /* SpaceLibraryArticlePresenter.swift in Sources */,
 				2853CBFD2616038B003BDB69 /* ServicesArPlanetPresenter.swift in Sources */,
 				2853CC00261603B9003BDB69 /* ServicesArPlanetWorker.swift in Sources */,
@@ -1308,14 +1265,10 @@
 				428B2EAE264569D900C416DD /* PlanetEnum.swift in Sources */,
 				42BAF8F42615BB34002BFDB8 /* Int.swift in Sources */,
 				42DBD0902614C118005DF02C /* News.swift in Sources */,
-				2893F57F262EDD7400B916AE /* MWViewController.swift in Sources */,
 				428B2E722645662600C416DD /* SolarSystemInteractor.swift in Sources */,
 				4239E32C260F2B0100375F6D /* NewsViewController.swift in Sources */,
-				2893F583262EDDA700B916AE /* MWInteractor.swift in Sources */,
-				2893F57B262EDD2900B916AE /* MWModels.swift in Sources */,
 				428B2EBB26456A3300C416DD /* FocusSquare.swift in Sources */,
 				4239E32B260F2B0100375F6D /* NewsModels.swift in Sources */,
-				280B35D026242E1200725B24 /* SolARSceneController.swift in Sources */,
 				2865C7212637136900F67CB9 /* ArticleItem.swift in Sources */,
 				2853CBF62615FC46003BDB69 /* ServicesTable.swift in Sources */,
 				2145391226552F4B00D4C6A0 /* SpaceLibraryTableOfContentsRouter.swift in Sources */,
@@ -1343,7 +1296,6 @@
 				289532122629C88300C37D90 /* ImageView.swift in Sources */,
 				428B2EC526456B9B00C416DD /* SCNNode.swift in Sources */,
 				2819890D262AB7C300C6B24D /* SetupApodDetailsView.swift in Sources */,
-				2893F56D262EDD0300B916AE /* MWPresenter.swift in Sources */,
 				428B2E952645692E00C416DD /* SolarSystemViewController+Actions.swift in Sources */,
 				420316A2265ADB34007CAEFA /* CategoryItem.swift in Sources */,
 				82248AE02658177100119DB3 /* SpaceLibraryCategoriesRouter.swift in Sources */,

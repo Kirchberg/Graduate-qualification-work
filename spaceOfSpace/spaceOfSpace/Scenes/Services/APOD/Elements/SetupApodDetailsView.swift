@@ -1,10 +1,3 @@
-//
-//  SetupApodDetailsView.swift
-//  spaceOfSpace
-//
-//  Created by Daniil Tchyorny on 17.04.2021.
-//
-
 import UIKit
 import Toaster
 

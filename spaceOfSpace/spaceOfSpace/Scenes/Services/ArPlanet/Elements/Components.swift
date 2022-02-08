@@ -1,10 +1,3 @@
-//
-//  Components.swift
-//  spaceOfSpace
-//
-//  Created by Daniil Tchyorny on 02.04.2021.
-//
-
 import UIKit
 import SceneKit
 import SceneKit.ModelIO

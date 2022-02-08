@@ -1,10 +1,3 @@
-//
-//  ApodRouter.swift
-//  spaceOfSpace
-//
-//  Created by Daniil Tchyorny on 12.04.2021.
-//
-
 import UIKit
 
 @objc protocol ApodRoutingLogic

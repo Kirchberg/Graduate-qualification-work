@@ -1,10 +1,3 @@
-//
-//  UIView.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 07.04.2021.
-//
-
 import UIKit
 
 extension UIView {

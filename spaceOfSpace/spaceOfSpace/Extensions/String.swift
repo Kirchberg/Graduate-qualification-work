@@ -1,10 +1,3 @@
-//
-//  String.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 26.05.2021.
-//
-
 import Foundation
 
 extension String {

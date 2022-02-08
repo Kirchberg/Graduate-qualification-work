@@ -1,10 +1,3 @@
-//
-//  Float4x4.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 07.05.2021.
-//
-
 import Foundation
 import ARKit
 

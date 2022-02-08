@@ -1,10 +1,3 @@
-//
-//  ExponentialRetryConfig.swift
-//  KinopoiskHD
-//
-//  Created by Kostarev Kirill on 31.07.2021.
-//
-
 import Foundation
 
 /// Cтруктура с параметрами для создания exponential retry

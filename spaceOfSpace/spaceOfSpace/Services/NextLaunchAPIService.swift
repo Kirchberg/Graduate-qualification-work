@@ -1,10 +1,3 @@
-//
-//  NextLaunchAPIService.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 11.05.2021.
-//
-
 import Foundation
 import SwiftyJSON
 import Alamofire

@@ -1,10 +1,3 @@
-//
-//  News.swift
-//  spaceOfSpace
-//
-//  Created by Kirill Kostarev on 31.03.2021.
-//
-
 import Foundation
 
 struct News {
