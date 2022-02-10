@@ -1,0 +1,10 @@
+name: "Swift Package Dependencies"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * 1' 
+jobs:
+  dependencies:
+    uses: MarcoEidinger/swift-package-dependencies-check/.github/workflows/reusableWorkflow.yml@v2
+    with:
+      commit-message: 'chore: update package dependencies'
