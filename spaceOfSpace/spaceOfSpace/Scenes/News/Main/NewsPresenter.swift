@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 protocol NewsPresentationLogic {
     func presentFetchedNews(response: NewsModel.FetchNews.Response)

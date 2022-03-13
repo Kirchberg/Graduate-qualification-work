@@ -40,6 +40,8 @@ class NewsCell: UITableViewCell {
     }
     
     private func setupCell() {
+        contentView.backgroundColor = .black
+
         newsImage.clipsToBounds = true
         newsImage.layer.cornerRadius = 20.0
         newsImage.contentMode = .scaleAspectFill

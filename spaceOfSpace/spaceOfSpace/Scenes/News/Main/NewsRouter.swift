@@ -8,7 +8,7 @@ protocol NewsDataPassing {
     var dataStore: NewsDataStore? { get }
 }
 
-class NewsRouter: NSObject, NewsRoutingLogic, NewsDataPassing {
+class NewsRouter: NewsRoutingLogic, NewsDataPassing {
     
     weak var viewController: NewsViewController?
     var dataStore: NewsDataStore?
