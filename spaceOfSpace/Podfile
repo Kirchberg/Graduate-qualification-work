@@ -16,4 +16,11 @@ target 'spaceOfSpace' do
   pod 'Toaster'
   pod "SMScrollView"
 
+  target 'spaceOfSpaceTests' do
+    inherit! :search_paths
+    # Pods for testing
+    pod "SwiftyMocky"
+    pod 'SnapshotTesting'
+  end
+
 end

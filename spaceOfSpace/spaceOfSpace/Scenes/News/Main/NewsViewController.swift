@@ -129,7 +129,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
                             progressBlock: nil
                         )
                     }
-                    
+
                     cell.newsTitle.text = news.title
                     cell.newsContent.text = news.content
                     cell.newsSource.text = news.datePublished
