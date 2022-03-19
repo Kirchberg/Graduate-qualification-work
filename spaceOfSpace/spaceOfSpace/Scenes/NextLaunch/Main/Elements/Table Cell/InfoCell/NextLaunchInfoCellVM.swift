@@ -1,6 +1,6 @@
 import UIKit
 
-class NextLaunchInfoCellVM: NextLaunchCellVMProtocol {
+final class NextLaunchInfoCellVM: NextLaunchCellVMProtocol {
     
     var height: CGFloat = UITableView.automaticDimension
     var sectionTitle: String = "Launch Info"

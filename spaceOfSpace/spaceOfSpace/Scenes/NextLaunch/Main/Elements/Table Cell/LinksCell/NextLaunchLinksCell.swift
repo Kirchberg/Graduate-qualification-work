@@ -1,7 +1,7 @@
 import UIKit
 import Kingfisher
 
-class NextLaunchLinksCell: UITableViewCell, CellProtocol {
+final class NextLaunchLinksCell: UITableViewCell, CellProtocol {
     
     weak var parentViewController: UIViewController?
     static var identifier: String = "NextLaunchLinksCell"
@@ -42,7 +42,7 @@ class NextLaunchLinksCell: UITableViewCell, CellProtocol {
         
         separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         selectionStyle = .none
-        
+
         cellView.backgroundColor = UIColor(red: 0.282, green: 0.282, blue: 0.29, alpha: 0.8)
         cellView.clipsToBounds = true
         cellView.layer.cornerRadius = 15.0

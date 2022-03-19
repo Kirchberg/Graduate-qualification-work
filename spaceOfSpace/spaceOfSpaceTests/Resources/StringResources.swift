@@ -2,21 +2,80 @@ import Foundation
 
 enum StringResources {
 
+    enum NextLaunch {
+
+        enum NextLaunchViewController {
+            static let isRecording = false
+            static let testName = "NextLaunchViewController"
+            static let shortMultipleCells = "ShortMultipleCells"
+            static let normalMultipleCells = "NormalMultipleCells"
+            static let longMultipleCells = "LongMultipleCells"
+        }
+
+        enum NextLaunchInfoCell {
+            static let isRecording = false
+            static let testName = "NextLaunchInfoCell"
+            static let oneLineText = "OneLineText"
+            static let longText = "LongText"
+        }
+
+        enum NextLaunchMissionCell {
+            static let isRecording = false
+            static let testName = "NextLaunchMissionCell"
+            static let oneLineText = "OneLineText"
+            static let longText = "LongText"
+        }
+
+        enum NextLaunchGalleryCell {
+            static let isRecording = false
+            static let testName = "NextLaunchGalleryCell"
+            static let onePhoto = "OnePhoto"
+            static let twoPhoto = "TwoPhoto"
+            static let multiplePhoto = "MultiplePhoto"
+
+            enum MockData {
+                static let mockOnePhoto: [URL] = [
+                    URL(string: "http://via.placeholder.com/142x114")!
+                ]
+                static let mockTwoPhoto: [URL] = [
+                    URL(string: "http://via.placeholder.com/142x114")!,
+                    URL(string: "http://via.placeholder.com/142x114")!
+                ]
+                static let mockMultiplePhoto: [URL] = [
+                    URL(string: "http://via.placeholder.com/142x114")!,
+                    URL(string: "http://via.placeholder.com/142x114")!,
+                    URL(string: "http://via.placeholder.com/142x114")!,
+                    URL(string: "http://via.placeholder.com/142x114")!
+                ]
+            }
+        }
+
+        enum NextLaunchLinksCell {
+            static let isRecording = false
+            static let testName = "NextLaunchLinksCell"
+            static let oneLink = "OneLink"
+
+            enum MockData {
+                static let mockImageLink = URL(string: "http://via.placeholder.com/50x50")!
+                static let mockSourceLink = URL(string: "https://www.google.com")!
+            }
+        }
+    }
+
     enum News {
         enum NewsViewController {
             static let isRecording = false
             static let testName = "NewsViewController"
-            static let testNewsViewControllerWithDefaultState = "DefaultState"
             static let testNewsViewControllerWithMultipleCells = "MultipleCells"
         }
-    }
 
-    enum NewsCell {
-        static let isRecording = false
-        static let testName = "NewsCell"
-        static let testNewsCellWithOneLineText = "OneLineText"
-        static let testNewsCellWithTwoLineText = "TwoLineText"
-        static let testNewsCellWithLongText = "LongText"
+        enum NewsCell {
+            static let isRecording = false
+            static let testName = "NewsCell"
+            static let testNewsCellWithOneLineText = "OneLineText"
+            static let testNewsCellWithTwoLineText = "TwoLineText"
+            static let testNewsCellWithLongText = "LongText"
+        }
     }
 
     enum Common {

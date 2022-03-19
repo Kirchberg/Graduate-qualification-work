@@ -41,8 +41,8 @@ extension NextLaunchPresenter: NextLaunchPresenterInput {
                 missionSection,
                 gallerySection,
                 linksSection
-            ])
-        view?.spinnerView.hide()
+            ]
+        )
     }
     
     private func setupSections(dataSource: NextLaunchDataSource) {
