@@ -10,7 +10,7 @@ final class NextLaunchViewController: VerticalViewController {
         setupUI()
         interactor?.viewIsReady()
     }
-    
+
     // MARK: UI
     
     lazy var spinnerView = ProgressHUD(text: "Loading")
@@ -77,6 +77,7 @@ final class NextLaunchViewController: VerticalViewController {
 
     func updateAllSections(cellVMs: [[NextLaunchCellVMProtocol]]) {
         self.cellVMs = cellVMs
+        spinnerView.hide()
         tableView.reloadData()
     }
 }
@@ -121,18 +122,18 @@ extension NextLaunchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 3 {
-            let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 41))
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 41))
             let label = UILabel()
             label.frame = CGRect.init(x: 15, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
             label.text = "Links"
             label.font = .systemFont(ofSize: 20, weight: UIFont.Weight.bold)
             label.textColor = .white
-            
+
             headerView.addSubview(label)
             return headerView
         }
         
-        return UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 0))
+        return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -1,6 +1,6 @@
 import UIKit
 
-class NextLaunchMissionCell: UITableViewCell, CellProtocol {
+final class NextLaunchMissionCell: UITableViewCell, CellProtocol {
     
     weak var parentViewController: UIViewController?
     static var identifier: String = "NextLaunchMissionCell"

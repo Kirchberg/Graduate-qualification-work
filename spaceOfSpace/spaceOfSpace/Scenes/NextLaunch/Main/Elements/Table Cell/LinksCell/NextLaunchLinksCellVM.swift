@@ -1,6 +1,6 @@
 import UIKit
 
-class NextLaunchLinksCellVM: NextLaunchCellVMProtocol {
+final class NextLaunchLinksCellVM: NextLaunchCellVMProtocol {
     
     var height: CGFloat = UITableView.automaticDimension
     var sectionTitle: String = "Links"

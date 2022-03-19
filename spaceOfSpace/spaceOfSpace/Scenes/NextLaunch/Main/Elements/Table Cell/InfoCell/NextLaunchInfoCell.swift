@@ -28,9 +28,9 @@ final class NextLaunchInfoCell: UITableViewCell, CellProtocol {
     
     func updateWith(vm: NextLaunchCellVMProtocol) {
         guard let vm = vm as? NextLaunchInfoCellVM else { return }
-        rocketTitle.text = "LoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsum"
-        launchServiceProviderTitle.text = "LoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsum"
-        launchDateWithTime.text = "LoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsum"
+        rocketTitle.text = vm.rocketTitle
+        launchServiceProviderTitle.text = vm.launchServiceProviderTitle
+        launchDateWithTime.text = vm.launchDateWithTime
         backgroundColor = .clear
     }
     

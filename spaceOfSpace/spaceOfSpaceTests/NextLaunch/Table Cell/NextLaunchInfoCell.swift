@@ -26,7 +26,7 @@ final class SnapshotNextLaunchInfoCell: XCTestCase {
         nextLaunchInfoCell = nil
     }
 
-    func testNewsCellWithOneLineText() throws {
+    func testNextLaunchInfoCellWithOneLineText() throws {
         containerView.frame = CGRect(x: 0, y: 0, width: 375, height: 178)
         nextLaunchInfoCell.rocketTitle.text = StringResources.Common.shortText
         nextLaunchInfoCell.launchServiceProviderTitle.text = StringResources.Common.shortText
@@ -42,7 +42,7 @@ final class SnapshotNextLaunchInfoCell: XCTestCase {
         XCTAssertNil(res)
     }
 
-    func testNewsCellWithLongText() throws {
+    func testNextLaunchInfoCellWithLongText() throws {
         containerView.frame = CGRect(x: 0, y: 0, width: 375, height: 214)
         nextLaunchInfoCell.rocketTitle.text = StringResources.Common.longText
         nextLaunchInfoCell.launchServiceProviderTitle.text = StringResources.Common.longText

@@ -1,6 +1,6 @@
 import UIKit
 
-class NextLaunchGalleryCell: UITableViewCell, CellProtocol {
+final class NextLaunchGalleryCell: UITableViewCell, CellProtocol {
     
     var parentViewController: UIViewController?
     static var identifier: String = "NextLaunchGallery"
