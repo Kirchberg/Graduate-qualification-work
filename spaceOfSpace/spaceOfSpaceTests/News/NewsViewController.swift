@@ -17,17 +17,6 @@ final class SnapshotNewsViewController: XCTestCase {
         newsVC = nil
     }
 
-    func testNewsViewControllerWithDefaultState() throws {
-        let res = verifySnapshot(
-            matching: newsVC,
-            as: .image,
-            named: Resources.testNewsViewControllerWithDefaultState,
-            record: Resources.isRecording,
-            testName: Resources.testName
-        )
-        XCTAssertNil(res)
-    }
-
     func testNewsViewControllerWithMultipleCells() throws {
         newsVC.displayFetchedObjects(viewModel: displayedCells)
         let res = verifySnapshot(

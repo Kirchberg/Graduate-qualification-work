@@ -2,21 +2,29 @@ import Foundation
 
 enum StringResources {
 
+    enum NextLaunch {
+        enum NextLaunchInfoCell {
+            static let isRecording = false
+            static let testName = "NextLaunchInfoCell"
+            static let oneLineText = "OneLineText"
+            static let longText = "LongText"
+        }
+    }
+
     enum News {
         enum NewsViewController {
             static let isRecording = false
             static let testName = "NewsViewController"
-            static let testNewsViewControllerWithDefaultState = "DefaultState"
             static let testNewsViewControllerWithMultipleCells = "MultipleCells"
         }
-    }
 
-    enum NewsCell {
-        static let isRecording = false
-        static let testName = "NewsCell"
-        static let testNewsCellWithOneLineText = "OneLineText"
-        static let testNewsCellWithTwoLineText = "TwoLineText"
-        static let testNewsCellWithLongText = "LongText"
+        enum NewsCell {
+            static let isRecording = false
+            static let testName = "NewsCell"
+            static let testNewsCellWithOneLineText = "OneLineText"
+            static let testNewsCellWithTwoLineText = "TwoLineText"
+            static let testNewsCellWithLongText = "LongText"
+        }
     }
 
     enum Common {

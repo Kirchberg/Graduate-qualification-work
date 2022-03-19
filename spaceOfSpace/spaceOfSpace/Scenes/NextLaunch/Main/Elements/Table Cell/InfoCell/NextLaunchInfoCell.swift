@@ -1,6 +1,6 @@
 import UIKit
 
-class NextLaunchInfoCell: UITableViewCell, CellProtocol {
+final class NextLaunchInfoCell: UITableViewCell, CellProtocol {
     
     weak var parentViewController: UIViewController?
     static var identifier: String = "NextLaunchInfoCell"
@@ -28,9 +28,9 @@ class NextLaunchInfoCell: UITableViewCell, CellProtocol {
     
     func updateWith(vm: NextLaunchCellVMProtocol) {
         guard let vm = vm as? NextLaunchInfoCellVM else { return }
-        rocketTitle.text = vm.rocketTitle
-        launchServiceProviderTitle.text = vm.launchServiceProviderTitle
-        launchDateWithTime.text = vm.launchDateWithTime
+        rocketTitle.text = "LoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsum"
+        launchServiceProviderTitle.text = "LoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsum"
+        launchDateWithTime.text = "LoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsum"
         backgroundColor = .clear
     }
     

@@ -33,9 +33,9 @@ final class SnapshotNewsCell: XCTestCase {
         let res = verifySnapshot(
             matching: containerView,
             as: .image,
-            named: StringResources.NewsCell.testNewsCellWithOneLineText,
-            record: StringResources.NewsCell.isRecording,
-            testName: StringResources.NewsCell.testName
+            named: StringResources.News.NewsCell.testNewsCellWithOneLineText,
+            record: StringResources.News.NewsCell.isRecording,
+            testName: StringResources.News.NewsCell.testName
         )
         XCTAssertNil(res)
     }
@@ -49,9 +49,9 @@ final class SnapshotNewsCell: XCTestCase {
         let res = verifySnapshot(
             matching: containerView,
             as: .image,
-            named: StringResources.NewsCell.testNewsCellWithTwoLineText,
-            record: StringResources.NewsCell.isRecording,
-            testName: StringResources.NewsCell.testName
+            named: StringResources.News.NewsCell.testNewsCellWithTwoLineText,
+            record: StringResources.News.NewsCell.isRecording,
+            testName: StringResources.News.NewsCell.testName
         )
         XCTAssertNil(res)
     }
@@ -65,9 +65,9 @@ final class SnapshotNewsCell: XCTestCase {
         let res = verifySnapshot(
             matching: containerView,
             as: .image,
-            named: StringResources.NewsCell.testNewsCellWithLongText,
-            record: StringResources.NewsCell.isRecording,
-            testName: StringResources.NewsCell.testName
+            named: StringResources.News.NewsCell.testNewsCellWithLongText,
+            record: StringResources.News.NewsCell.isRecording,
+            testName: StringResources.News.NewsCell.testName
         )
         XCTAssertNil(res)
     }
