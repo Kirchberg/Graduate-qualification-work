@@ -78,6 +78,35 @@ enum StringResources {
         }
     }
 
+    enum SpaceLibrary {
+
+        enum SpaceLibraryCategoriesViewController {
+            static let isRecording = false
+            static let testName = "SpaceLibraryCategoriesViewController"
+            static let testSpaceLibraryCategoriesViewControllerWithDefaultState = "SpaceLibraryCategoriesViewController"
+        }
+
+        enum SpaceLibraryCategoryDetailedViewController {
+            static let isRecording = false
+            static let testName = "SpaceLibraryCategoryDetailedViewController"
+            static let testSpaceLibraryCategoryDetailedViewControllerWithDefaultState = "SpaceLibraryCategoryDetailedViewController"
+
+            enum MockData {
+                static let imagePlaceholder = "http://via.placeholder.com/50x50"
+            }
+        }
+
+        enum SpaceLibraryArticleViewController {
+            static let isRecording = false
+            static let testName = "SpaceLibraryArticleViewController"
+            static let testSpaceLibraryCategoryDetailedViewControllerWithDefaultState = "SpaceLibraryArticleViewController"
+            
+            enum MockData {
+                static let imagePlaceholder = "http://via.placeholder.com/50x50"
+            }
+        }
+    }
+
     enum Common {
         static let shortText = "Lorem ipsum dolor sit amet"
         static let normalText = "Integer tincidunt ultricies consectetur. Phasellus ut volutpat nisi."

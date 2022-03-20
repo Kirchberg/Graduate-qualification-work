@@ -20,7 +20,7 @@ protocol SpaceLibraryArticleDisplayLogic: AnyObject {
     func goToSection(sectionTitle: String)
 }
 
-class SpaceLibraryArticleViewController: VerticalViewController, SpaceLibraryArticleDisplayLogic {
+final class SpaceLibraryArticleViewController: VerticalViewController, SpaceLibraryArticleDisplayLogic {
     var interactor: SpaceLibraryArticleBusinessLogic?
     var router: (NSObjectProtocol & SpaceLibraryArticleRoutingLogic & SpaceLibraryArticleDataPassing)?
     

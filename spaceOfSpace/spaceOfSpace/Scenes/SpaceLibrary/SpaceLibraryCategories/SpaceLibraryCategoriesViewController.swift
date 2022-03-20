@@ -4,7 +4,7 @@ protocol SpaceLibraryCategoriesDisplayLogic: AnyObject {
     func displayCollectionItems(viewModel: SpaceLibraryCategoriesModel.Categories.ViewModel)
 }
 
-class SpaceLibraryCategoriesViewController: VerticalViewController, SpaceLibraryCategoriesDisplayLogic {
+final class SpaceLibraryCategoriesViewController: VerticalViewController, SpaceLibraryCategoriesDisplayLogic {
     
     var interactor: SpaceLibraryCategoriesBusinessLogic?
     var router: (NSObjectProtocol & SpaceLibraryCategoriesRoutingLogic & SpaceLibraryCategoriesDataPassing)?
