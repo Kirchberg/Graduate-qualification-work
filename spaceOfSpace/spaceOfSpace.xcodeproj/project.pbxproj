@@ -182,6 +182,9 @@
 		B3652B9F27DE367F004B97A4 /* ImageResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3652B9E27DE367F004B97A4 /* ImageResources.swift */; };
 		B3652BA227DE373A004B97A4 /* StringResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3652BA127DE373A004B97A4 /* StringResources.swift */; };
 		B3652BA427DE3BBD004B97A4 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3652BA327DE3BBD004B97A4 /* NewsViewController.swift */; };
+		B3A3E23427E736A900E69AB9 /* SpaceLibraryCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3E23327E736A900E69AB9 /* SpaceLibraryCategoriesViewController.swift */; };
+		B3A3E23627E742D600E69AB9 /* SpaceLibraryCategoryDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3E23527E742D600E69AB9 /* SpaceLibraryCategoryDetailedViewController.swift */; };
+		B3A3E23827E7477400E69AB9 /* SpaceLibraryArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3E23727E7477400E69AB9 /* SpaceLibraryArticleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -400,6 +403,9 @@
 		B3652B9E27DE367F004B97A4 /* ImageResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResources.swift; sourceTree = "<group>"; };
 		B3652BA127DE373A004B97A4 /* StringResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringResources.swift; sourceTree = "<group>"; };
 		B3652BA327DE3BBD004B97A4 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		B3A3E23327E736A900E69AB9 /* SpaceLibraryCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceLibraryCategoriesViewController.swift; sourceTree = "<group>"; };
+		B3A3E23527E742D600E69AB9 /* SpaceLibraryCategoryDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceLibraryCategoryDetailedViewController.swift; sourceTree = "<group>"; };
+		B3A3E23727E7477400E69AB9 /* SpaceLibraryArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceLibraryArticleViewController.swift; sourceTree = "<group>"; };
 		D839A9A20F4089754FF6425B /* Pods_spaceOfSpace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_spaceOfSpace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA62184196A3B83755EC62F0 /* Pods-spaceOfSpaceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-spaceOfSpaceTests.release.xcconfig"; path = "Target Support Files/Pods-spaceOfSpaceTests/Pods-spaceOfSpaceTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1068,6 +1074,7 @@
 				B3652BA027DE3723004B97A4 /* Resources */,
 				42CF03A727E5C029006F67AE /* NextLaunch */,
 				B3652B9C27DE3342004B97A4 /* News */,
+				B3A3E23227E734D600E69AB9 /* SpaceLibrary */,
 			);
 			path = spaceOfSpaceTests;
 			sourceTree = "<group>";
@@ -1095,6 +1102,16 @@
 				B3652BA127DE373A004B97A4 /* StringResources.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B3A3E23227E734D600E69AB9 /* SpaceLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				B3A3E23327E736A900E69AB9 /* SpaceLibraryCategoriesViewController.swift */,
+				B3A3E23527E742D600E69AB9 /* SpaceLibraryCategoryDetailedViewController.swift */,
+				B3A3E23727E7477400E69AB9 /* SpaceLibraryArticleViewController.swift */,
+			);
+			path = SpaceLibrary;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1486,9 +1503,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3A3E23827E7477400E69AB9 /* SpaceLibraryArticleViewController.swift in Sources */,
 				B3652BA427DE3BBD004B97A4 /* NewsViewController.swift in Sources */,
 				42CF03A927E5C06C006F67AE /* NextLaunchInfoCell.swift in Sources */,
 				42CF03B227E5DCE7006F67AE /* NextLaunchViewController.swift in Sources */,
+				B3A3E23627E742D600E69AB9 /* SpaceLibraryCategoryDetailedViewController.swift in Sources */,
+				B3A3E23427E736A900E69AB9 /* SpaceLibraryCategoriesViewController.swift in Sources */,
 				42CF03AB27E5C85E006F67AE /* NextLaunchMissionCell.swift in Sources */,
 				B3652BA227DE373A004B97A4 /* StringResources.swift in Sources */,
 				42CF03AD27E5CBA8006F67AE /* NextLaunchGalleryCell.swift in Sources */,

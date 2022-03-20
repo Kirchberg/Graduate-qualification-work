@@ -6,7 +6,7 @@ protocol SpaceLibraryCategoryDetailedDisplayLogic: AnyObject {
     func updateTitle(title: String)
 }
 
-class SpaceLibraryCategoryDetailedViewController: VerticalViewController, SpaceLibraryCategoryDetailedDisplayLogic {
+final class SpaceLibraryCategoryDetailedViewController: VerticalViewController, SpaceLibraryCategoryDetailedDisplayLogic {
     var interactor: SpaceLibraryCategoryDetailedBusinessLogic?
     var router: (NSObjectProtocol & SpaceLibraryCategoryDetailedRoutingLogic & SpaceLibraryCategoryDetailedDataPassing)?
     
