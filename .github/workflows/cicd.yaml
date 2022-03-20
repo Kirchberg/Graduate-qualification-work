@@ -17,8 +17,8 @@ jobs:
           pod install
       - name: Build
         working-directory: ./spaceOfSpace
-        run: xcodebuild -workspace spaceOfSpace.xcworkspace -scheme spaceOfSpace CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED="NO" CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO" -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.2'
+        run: xcodebuild -workspace spaceOfSpace.xcworkspace -scheme spaceOfSpace CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED="NO" CODE_SIGN_ENTITLEMENTS="" CODE_SIGNING_ALLOWED="NO" -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.4'
       - name: Testing
         working-directory: ./spaceOfSpace
-        run: xcodebuild test -workspace spaceOfSpace.xcworkspace -scheme spaceOfSpaceTests -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.2'
+        run: xcodebuild test -workspace spaceOfSpace.xcworkspace -scheme spaceOfSpaceTests -destination 'platform=iOS Simulator,name=iPhone 8,OS=15.4'
       
