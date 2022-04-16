@@ -1,0 +1,152 @@
+@startuml
+' STYLE START
+hide empty members
+skinparam sequenceMessageAlign center
+skinparam classFontSize 14
+' STYLE END
+
+
+class "NewsWebBrowserRoutingLogic" as NewsWebBrowserRoutingLogic << (P, AntiqueWhite) protocol >> {  
+}
+class "NewsWebBrowserDataPassing" as NewsWebBrowserDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : NewsWebBrowserDataStore? 
+}
+class "NewsWebBrowserRouter" as NewsWebBrowserRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : NewsWebBrowserViewController?
+  ~dataStore : NewsWebBrowserDataStore? 
+}
+class "NewsWebBrowserWorker" as NewsWebBrowserWorker << (C, AntiqueWhite) class >> { 
+  ~doSomeWork() 
+}
+class "NewsWebBrowserDisplayLogic" as NewsWebBrowserDisplayLogic << (P, AntiqueWhite) protocol >> { 
+  ~displayWebBrowser(viewModel:) 
+}
+class "NewsWebBrowserViewController" as NewsWebBrowserViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : NewsWebBrowserBusinessLogic?
+  ~router : (NewsWebBrowserRoutingLogic & NewsWebBrowserDataPassing)?
+  ~viewDidLoad()
+  ~deinit
+  -progress
+  -urlToShow : URL?
+  ~webView : WKWebView
+  ~progressView : UIProgressView
+  -setupUI()
+  -shareButtonTapped()
+  ~displayWebBrowser(viewModel:) 
+}
+class "NewsWebBrowser" as NewsWebBrowser << (E, AntiqueWhite) enum >> {  
+}
+class "NewsWebBrowserPresentationLogic" as NewsWebBrowserPresentationLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentHyperlink(url:) 
+}
+class "NewsWebBrowserPresenter" as NewsWebBrowserPresenter << (C, AntiqueWhite) class >> { 
+  ~viewController : NewsWebBrowserDisplayLogic?
+  ~presentHyperlink(url:) 
+}
+class "NewsWebConfigurator" as NewsWebConfigurator << (C, AntiqueWhite) class >> { 
+  ~{static} build() 
+}
+class "NewsWebBrowserBusinessLogic" as NewsWebBrowserBusinessLogic << (P, AntiqueWhite) protocol >> { 
+  ~getHyperlink() 
+}
+class "NewsWebBrowserDataStore" as NewsWebBrowserDataStore << (P, AntiqueWhite) protocol >> { 
+  ~hyperlink : String? 
+}
+class "NewsWebBrowserInteractor" as NewsWebBrowserInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : NewsWebBrowserPresentationLogic?
+  ~worker : NewsWebBrowserWorker?
+  ~hyperlink : String?
+  ~getHyperlink() 
+}
+class "DisplayedObject" as DisplayedObject << (P, AntiqueWhite) protocol >> {  
+}
+class "NewsModel" as NewsModel << (E, AntiqueWhite) enum >> {  
+}
+class "NewsBusinessLogic" as NewsBusinessLogic << (P, AntiqueWhite) protocol >> { 
+  ~fetchNews(request:) 
+}
+class "NewsDataStore" as NewsDataStore << (P, AntiqueWhite) protocol >> { 
+  ~news : [News?] 
+}
+class "NewsInteractor" as NewsInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : NewsPresentationLogic?
+  ~worker : NewsWorker?
+  ~news : [News?]
+  ~fetchNews(request:) 
+}
+class "NewsWorkerLogic" as NewsWorkerLogic << (P, AntiqueWhite) protocol >> { 
+  ~fetch(startFetchFrom:success:) 
+}
+class "NewsWorker" as NewsWorker << (C, AntiqueWhite) class >> { 
+  ~newsManager
+  ~fetch(startFetchFrom:success:) 
+}
+class "NewsRoutingLogic" as NewsRoutingLogic << (P, AntiqueWhite) protocol >> { 
+  ~routeToShowBrowser() 
+}
+class "NewsDataPassing" as NewsDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : NewsDataStore? 
+}
+class "NewsRouter" as NewsRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : NewsViewController?
+  ~dataStore : NewsDataStore?
+  ~routeToShowBrowser()
+  ~passDataToNewsWebBrowser(source:destination:) 
+}
+class "NewsPresentationLogic" as NewsPresentationLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentFetchedNews(response:) 
+}
+class "NewsPresenter" as NewsPresenter << (C, AntiqueWhite) class >> { 
+  ~viewController : NewsDisplayLogic?
+  ~dateFormatter : DateFormatter
+  ~presentFetchedNews(response:)
+  -formatFetchedNews(arrayOfNews:)
+  -formatTime(for:) 
+}
+class "NewsDisplayLogic" as NewsDisplayLogic << (P, AntiqueWhite) protocol >> { 
+  ~displayFetchedObjects(viewModel:) 
+}
+class "NewsViewController" as NewsViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : NewsBusinessLogic?
+  ~router : (NewsRoutingLogic & NewsDataPassing)?
+  -setup()
+  ~viewDidLoad()
+  ~viewWillAppear(_:)
+  ~tableView : UITableView
+  ~startFetchFrom : Int
+  ~isPaginating : Bool
+  ~spinnerView
+  ~spinnerFooterView
+  -displayedObjects
+  -setupUI()
+  ~displayFetchedObjects(viewModel:) 
+}
+class "NewsCell" as NewsCell << (C, AntiqueWhite) class >> { 
+  ~{static} identifier : String
+  ~newsImage
+  ~newsTitle
+  ~newsContent
+  ~newsSource
+  ~init(style:reuseIdentifier:)
+  ~init(coder:)
+  ~awakeFromNib()
+  ~setSelected(_:animated:)
+  -setupCell()
+  -setupAutoLayout() 
+}
+NewsWebBrowserRoutingLogic <|.. NewsWebBrowserRouter
+NewsWebBrowserDataPassing <|.. NewsWebBrowserRouter
+NewsWebBrowserDisplayLogic <|.. NewsWebBrowserViewController
+NewsWebBrowserPresentationLogic <|.. NewsWebBrowserPresenter
+NewsWebBrowserBusinessLogic <|.. NewsWebBrowserInteractor
+NewsWebBrowserDataStore <|.. NewsWebBrowserInteractor
+NewsBusinessLogic <|.. NewsInteractor
+NewsDataStore <|.. NewsInteractor
+NewsWorkerLogic <|.. NewsWorker
+NewsRoutingLogic <|.. NewsRouter
+NewsDataPassing <|.. NewsRouter
+NewsPresentationLogic <|.. NewsPresenter
+NewsDisplayLogic <|.. NewsViewController
+UITableViewCell <|-- NewsCell
+
+@enduml

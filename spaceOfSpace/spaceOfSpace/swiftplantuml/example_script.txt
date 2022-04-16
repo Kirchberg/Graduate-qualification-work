@@ -1,0 +1,1 @@
+swiftplantuml ../Scenes/Services --output consoleOnly > sources.txt | java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $1

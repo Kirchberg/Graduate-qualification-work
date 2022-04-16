@@ -1,0 +1,261 @@
+@startuml
+' STYLE START
+hide empty members
+skinparam sequenceMessageAlign center
+skinparam classFontSize 14
+' STYLE END
+
+
+class "NLWebBrowserModule" as NLWebBrowserModule << (C, AntiqueWhite) class >> { 
+  ~{static} build(withURL:) 
+}
+class "NLWebBrowserDataSource" as NLWebBrowserDataSource << (C, AntiqueWhite) class >> { 
+  ~browserURL : String
+  ~init(browserURL:) 
+}
+class "NLWebBrowserWorker" as NLWebBrowserWorker << (C, AntiqueWhite) class >> {  
+}
+class "NLWebBrowserRouterInput" as NLWebBrowserRouterInput << (P, AntiqueWhite) protocol >> {  
+}
+class "NLWebBrowserRouter" as NLWebBrowserRouter << (C, AntiqueWhite) class >> {  
+}
+class "NLWebBrowserPresenterInput" as NLWebBrowserPresenterInput << (P, AntiqueWhite) protocol >> { 
+  ~update(dataSource:) 
+}
+class "NLWebBrowserPresenter" as NLWebBrowserPresenter << (C, AntiqueWhite) class >> { 
+  ~view : (NLWebBrowserViewController)? 
+}
+class "NLWebBrowserViewController" as NLWebBrowserViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : NLWebBrowserInteractorProtocol?
+  ~viewDidLoad()
+  ~deinit
+  -progress
+  -urlToShow : URL?
+  ~webView : WKWebView
+  ~progressView : UIProgressView
+  -setupUI()
+  -shareButtonTapped()
+  ~displayWebBrowser(with:) 
+}
+class "NLWebBrowserInteractorInput" as NLWebBrowserInteractorInput << (P, AntiqueWhite) protocol >> {  
+}
+class "NLWebBrowserInteractor" as NLWebBrowserInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : NLWebBrowserPresenterInput?
+  ~router : NLWebBrowserRouterInput?
+  ~worker : NLWebBrowserWorker?
+  ~dataSource : NLWebBrowserDataSource
+  ~init(browserURL:) 
+}
+class "NextLaunchModule" as NextLaunchModule << (C, AntiqueWhite) class >> { 
+  ~{static} build() 
+}
+class "NextLaunchViewController" as NextLaunchViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : NextLaunchInteractorProtocol?
+  ~viewDidLoad()
+  ~spinnerView
+  ~tableView : UITableView
+  -setupUI()
+  -setupTableView()
+  -registerCells()
+  ~cellVMs
+  ~updateSection(withIndex:cellVMs:)
+  ~updateAllSections(cellVMs:) 
+}
+class "linkType" as linkType << (E, AntiqueWhite) enum >> { 
+  ~wiki
+  ~map 
+}
+class "NextLaunchInfo" as NextLaunchInfo << (S, AntiqueWhite) struct >> { 
+  ~name : String?
+  ~launchServiceProviderTitle : String?
+  ~date : String? 
+}
+class "NextLaunchMission" as NextLaunchMission << (S, AntiqueWhite) struct >> { 
+  ~missionDescription : String? 
+}
+class "NextLaunchGallery" as NextLaunchGallery << (S, AntiqueWhite) struct >> { 
+  ~galleryPhotosURL : [String]? 
+}
+class "NextLaunchLinks" as NextLaunchLinks << (S, AntiqueWhite) struct >> { 
+  ~linkType : linkType?
+  ~imageURL : String?
+  ~sourceTitle : String?
+  ~sourceDescription : String?
+  ~browserURL : String? 
+}
+class "NextLaunchDataSource" as NextLaunchDataSource << (C, AntiqueWhite) class >> { 
+  ~launchInfoSection : NextLaunchInfo
+  ~missionSection : NextLaunchMission
+  ~gallerySection : NextLaunchGallery
+  ~linksSection : [NextLaunchLinks]
+  ~init(launchInfoSection:missionSection:gallerySection:linksSection:) 
+}
+class "NextLaunchPresenterInput" as NextLaunchPresenterInput << (P, AntiqueWhite) protocol >> { 
+  ~update(dataSource:) 
+}
+class "NextLaunchPresenter" as NextLaunchPresenter << (C, AntiqueWhite) class >> { 
+  ~dateFormatter : DateFormatter
+  ~view : (NextLaunchViewController)?
+  ~launchInfoSection
+  ~missionSection
+  ~gallerySection
+  ~linksSection 
+}
+class "NextLaunchRouterInput" as NextLaunchRouterInput << (P, AntiqueWhite) protocol >> { 
+  ~transitionHandler : UIViewController?
+  ~openSecondScreen(withURL:) 
+}
+class "NextLaunchRouter" as NextLaunchRouter << (C, AntiqueWhite) class >> { 
+  ~transitionHandler : UIViewController? 
+}
+class "NextLaunchWorker" as NextLaunchWorker << (C, AntiqueWhite) class >> { 
+  ~nextLaunchManager
+  ~requestNextLaunch(success:) 
+}
+class "NextLaunchLinksCell" as NextLaunchLinksCell << (C, AntiqueWhite) class >> { 
+  ~parentViewController : UIViewController?
+  ~{static} identifier : String
+  ~cellView
+  ~sourceImage
+  ~sourceDescription
+  ~sourceTitle
+  ~sourceLink
+  ~init(style:reuseIdentifier:)
+  ~init(coder:)
+  ~setSelected(_:animated:)
+  ~updateWith(vm:)
+  -setupCell()
+  -setupView()
+  -setImage(with:) 
+}
+class "NextLaunchLinksCellVM" as NextLaunchLinksCellVM << (C, AntiqueWhite) class >> { 
+  ~height : CGFloat
+  ~sectionTitle : String
+  ~cellType : UITableViewCell.Type
+  ~cellName : CellNameProtocol
+  ~imageURL : URL
+  ~sourceTitle : String
+  ~sourceDescription : String
+  ~sourceLink : URL
+  ~init(cellName:imageURL:sourceTitle:sourceDescription:sourceLink:) 
+}
+class "NextLaunchInfoCell" as NextLaunchInfoCell << (C, AntiqueWhite) class >> { 
+  ~parentViewController : UIViewController?
+  ~{static} identifier : String
+  ~rocketTitle
+  ~launchServiceProviderTitle
+  ~launchDate
+  ~launchDateWithTime
+  ~init(style:reuseIdentifier:)
+  ~init(coder:)
+  ~setSelected(_:animated:)
+  ~updateWith(vm:)
+  -setupCell()
+  -setupView() 
+}
+class "NextLaunchInfoCellVM" as NextLaunchInfoCellVM << (C, AntiqueWhite) class >> { 
+  ~height : CGFloat
+  ~sectionTitle : String
+  ~cellType : UITableViewCell.Type
+  ~cellName : CellNameProtocol
+  ~rocketTitle : String
+  ~launchServiceProviderTitle : String
+  ~launchDateWithTime : String
+  ~init(cellName:rocketTitle:launchServiceProviderTitle:launchDateWithTime:) 
+}
+class "NextLaunchMissionCell" as NextLaunchMissionCell << (C, AntiqueWhite) class >> { 
+  ~parentViewController : UIViewController?
+  ~{static} identifier : String
+  ~missionDescription
+  ~init(style:reuseIdentifier:)
+  ~init(coder:)
+  ~setSelected(_:animated:)
+  ~updateWith(vm:)
+  -setupCell()
+  -setupView() 
+}
+class "NextLaunchMissionCellVM" as NextLaunchMissionCellVM << (C, AntiqueWhite) class >> { 
+  ~height : CGFloat
+  ~sectionTitle : String
+  ~cellType : UITableViewCell.Type
+  ~cellName : CellNameProtocol
+  ~missionDescription : String
+  ~init(cellName:missionDescription:) 
+}
+class "NextLaunchGalleryCellVM" as NextLaunchGalleryCellVM << (C, AntiqueWhite) class >> { 
+  ~height : CGFloat
+  ~sectionTitle : String
+  ~cellType : UITableViewCell.Type
+  ~cellName : CellNameProtocol
+  ~photosURL : [URL]
+  ~init(cellName:photosURL:) 
+}
+class "NextLaunchPhotoCell" as NextLaunchPhotoCell << (C, AntiqueWhite) class >> { 
+  ~{static} identifier : String
+  ~photoImage
+  ~init(frame:)
+  ~init(coder:)
+  -setupCell()
+  -setupView()
+  ~updateWith(imageURL:) 
+}
+class "NextLaunchGalleryCell" as NextLaunchGalleryCell << (C, AntiqueWhite) class >> { 
+  ~parentViewController : UIViewController?
+  ~{static} identifier : String
+  ~collectionView : UICollectionView
+  ~galleryPhotosView : [NextLaunchPhotoCell]?
+  ~galleryPhotosURL : [URL]?
+  ~init(style:reuseIdentifier:)
+  ~init(coder:)
+  ~setSelected(_:animated:)
+  ~updateWith(vm:)
+  -setupCell()
+  -setupView()
+  -setupCollectionView()
+  -registerCells() 
+}
+class "NextLaunchInteractorInput" as NextLaunchInteractorInput << (P, AntiqueWhite) protocol >> {  
+}
+class "NextLaunchInteractor" as NextLaunchInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : NextLaunchPresenterInput?
+  ~router : NextLaunchRouterInput?
+  ~worker : NextLaunchWorker?
+  ~dataSource : NextLaunchDataSource? 
+}
+class "NextLaunchInteractorProtocol" as NextLaunchInteractorProtocol << (P, AntiqueWhite) protocol >> { 
+  ~viewIsReady()
+  ~selected(with:didSelectRowAt:) 
+}
+class "CellNameProtocol" as CellNameProtocol << (P, AntiqueWhite) protocol >> {  
+}
+class "NextLaunchCellVMProtocol" as NextLaunchCellVMProtocol << (P, AntiqueWhite) protocol >> { 
+  ~height : CGFloat
+  ~sectionTitle : String
+  ~cellType : UITableViewCell.Type
+  ~cellName : CellNameProtocol 
+}
+class "CellProtocol" as CellProtocol << (P, AntiqueWhite) protocol >> { 
+  ~parentViewController : UIViewController?
+  ~{static} identifier : String
+  ~updateWith(vm:) 
+}
+class "NLWebBrowserInteractorProtocol" as NLWebBrowserInteractorProtocol << (P, AntiqueWhite) protocol >> { 
+  ~viewIsReady() 
+}
+UIViewController <|-- NLWebBrowserViewController
+String -- linkType
+UITableViewCell <|-- NextLaunchLinksCell
+CellProtocol <|-- NextLaunchLinksCell
+NextLaunchCellVMProtocol <|-- NextLaunchLinksCellVM
+UITableViewCell <|-- NextLaunchInfoCell
+CellProtocol <|-- NextLaunchInfoCell
+NextLaunchCellVMProtocol <|-- NextLaunchInfoCellVM
+UITableViewCell <|-- NextLaunchMissionCell
+CellProtocol <|-- NextLaunchMissionCell
+NextLaunchCellVMProtocol <|-- NextLaunchMissionCellVM
+NextLaunchCellVMProtocol <|-- NextLaunchGalleryCellVM
+UICollectionViewCell <|-- NextLaunchPhotoCell
+UITableViewCell <|-- NextLaunchGalleryCell
+CellProtocol <|-- NextLaunchGalleryCell
+
+@enduml

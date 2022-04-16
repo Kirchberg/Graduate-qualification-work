@@ -1,0 +1,39 @@
+elements:
+  showExtensions: false
+  showGenerics: false
+relationships:
+  inheritance:
+    exclude:
+    - "Codable"
+    - "NSObject"
+    - "VerticalViewController"
+    - "AnyObject"
+    - "class"
+skinparamCommands:
+- skinparam sequenceMessageAlign center
+- skinparam classFontSize 14
+stereotypes:
+  class:
+    name: class
+    spot:
+      character: C
+      color: AntiqueWhite
+  struct:
+    name: struct
+    spot:
+      character: S
+      color: AntiqueWhite
+  extension:
+    spot:
+      character: X
+      color: AntiqueWhite
+  enum:
+    name: enum
+    spot:
+      character: E
+      color: AntiqueWhite
+  protocol:
+    name: protocol
+    spot:
+      character: P
+      color: AntiqueWhite
