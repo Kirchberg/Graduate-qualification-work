@@ -1,0 +1,48 @@
+@startuml
+' STYLE START
+hide empty members
+skinparam sequenceMessageAlign center
+skinparam classFontSize 14
+' STYLE END
+
+
+class "ImageResources" as ImageResources << (E, AntiqueWhite) enum >> {  
+}
+class "ProgressHUD" as ProgressHUD << (C, AntiqueWhite) class >> { 
+  -text : String?
+  -activityIndictor : UIActivityIndicatorView
+  -label : UILabel
+  -blurEffect
+  -vibrancyView : UIVisualEffectView
+  ~init(text:)
+  ~init(coder:)
+  -setup()
+  ~didMoveToSuperview()
+  ~show()
+  ~hide() 
+}
+class "VerticalViewController" as VerticalViewController << (C, AntiqueWhite) class >> { 
+  ~supportedInterfaceOrientations : UIInterfaceOrientationMask 
+}
+class "VerticalNavigationController" as VerticalNavigationController << (C, AntiqueWhite) class >> { 
+  ~supportedInterfaceOrientations : UIInterfaceOrientationMask 
+}
+class "CustomTabBarController" as CustomTabBarController << (C, AntiqueWhite) class >> { 
+  ~supportedInterfaceOrientations : UIInterfaceOrientationMask
+  -tabNextLaunchViewController : VerticalNavigationController?
+  -tabNewsViewController : VerticalNavigationController?
+  -tabServicesViewController : VerticalNavigationController?
+  -tabSpaceLibraryViewController : VerticalNavigationController?
+  -subviewControllers : [VerticalNavigationController]
+  ~viewDidLoad()
+  -setupVCs()
+  -setupItems()
+  -setupTabBarUI()
+  -setupNavigationController(title:navigationVC:) 
+}
+UIVisualEffectView <|-- ProgressHUD
+UIViewController <|-- VerticalViewController
+UINavigationController <|-- VerticalNavigationController
+UITabBarController <|-- CustomTabBarController
+
+@enduml
