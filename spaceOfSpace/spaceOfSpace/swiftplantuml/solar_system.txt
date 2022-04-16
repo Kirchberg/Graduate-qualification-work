@@ -1,0 +1,191 @@
+@startuml
+' STYLE START
+hide empty members
+skinparam sequenceMessageAlign center
+skinparam classFontSize 14
+' STYLE END
+
+
+class "SolarSystem" as SolarSystem << (E, AntiqueWhite) enum >> {  
+}
+class "SolarSystemDisplayLogic" as SolarSystemDisplayLogic << (P, AntiqueWhite) protocol >> {  
+}
+class "SolarSystemViewController" as SolarSystemViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : SolarSystemBusinessLogic?
+  ~router : (NSObjectProtocol & SolarSystemRoutingLogic & SolarSystemDataPassing)?
+  -setup()
+  ~prepare(for:sender:)
+  ~containerView
+  ~coachingOverlay
+  ~sceneView : VirtualObjectARView
+  -focusSquare
+  ~backButton : UIButton
+  ~clearButton : UIButton
+  ~addSolarSystemButton : UIButton
+  ~isSpinnng : Bool
+  ~spinButton : UIButton
+  ~restartExperienceHandler : () -> Void
+  ~virtualObjectInteraction
+  ~isObjectVisible
+  ~sunNode
+  ~isRestartAvailable
+  ~updateQueue
+  ~screenCenter : CGPoint
+  ~session : ARSession
+  ~viewDidLoad()
+  ~viewWillAppear(_:)
+  ~viewWillDisappear(_:)
+  ~initSceneView()
+  ~initPlanetNode()
+  ~initSunNode()
+  ~setupCamera()
+  ~resetTracking()
+  ~updateFocusSquare()
+  ~restartExperience()
+  ~displayErrorMessage(title:message:) 
+}
+class "SolarSystemRoutingLogic" as SolarSystemRoutingLogic << (P, AntiqueWhite) protocol >> {  
+}
+class "SolarSystemDataPassing" as SolarSystemDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : SolarSystemDataStore? 
+}
+class "SolarSystemRouter" as SolarSystemRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : SolarSystemViewController?
+  ~dataStore : SolarSystemDataStore? 
+}
+class "SolarSystemWorker" as SolarSystemWorker << (C, AntiqueWhite) class >> {  
+}
+class "SolarSystemBusinessLogic" as SolarSystemBusinessLogic << (P, AntiqueWhite) protocol >> {  
+}
+class "SolarSystemDataStore" as SolarSystemDataStore << (P, AntiqueWhite) protocol >> {  
+}
+class "SolarSystemInteractor" as SolarSystemInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : SolarSystemPresentationLogic?
+  ~worker : SolarSystemWorker? 
+}
+class "VirtualObjectInteraction" as VirtualObjectInteraction << (C, AntiqueWhite) class >> { 
+  ~translateAssumingInfinitePlane
+  ~sceneView : VirtualObjectARView
+  ~selectedObject : PlanetNode?
+  -trackedObject : PlanetNode?
+  -currentTrackingPosition : CGPoint?
+  ~init(sceneView:)
+  ~didPan(_:)
+  ~updateObjectToCurrentTrackingPosition()
+  ~didRotate(_:)
+  ~didTap(_:)
+  ~gestureRecognizer(_:shouldRecognizeSimultaneouslyWith:)
+  -objectInteracting(with:in:)
+  -translate(_:basedOn:infinitePlane:) 
+}
+class "ThresholdPanGesture" as ThresholdPanGesture << (C, AntiqueWhite) class >> { 
+  ~isThresholdExceeded
+  ~state : UIGestureRecognizer.State
+  -{static} threshold(forTouchCount:)
+  ~touchesMoved(_:with:) 
+}
+class "PlanetLoop" as PlanetLoop << (C, AntiqueWhite) class >> { 
+  ~init(planet:)
+  ~init(coder:) 
+}
+class "PlanetNode" as PlanetNode << (C, AntiqueWhite) class >> { 
+  ~planetType : PlanetEnum
+  ~node : SCNNode?
+  -recentVirtualObjectDistances
+  ~reset()
+  ~init(planet:)
+  ~setPosition(_:relativeTo:smoothMovement:)
+  ~adjustOntoPlaneAnchor(_:using:)
+  ~addPlanet(planet:)
+  ~addPlanet(planetNode:)
+  -getPlanetOrbit(planet:)
+  -addPlanetLoop(planet:)
+  -addLight(planet:)
+  -getPlanetRotation(duration:)
+  ~init(coder:) 
+}
+class "SolarPlanet" as SolarPlanet << (C, AntiqueWhite) class >> { 
+  ~diffuse : UIImage
+  ~specular : UIImage?
+  ~emission : UIImage?
+  ~normal : UIImage?
+  ~radius : CGFloat
+  ~anxisTime : Double
+  ~revolutionTime : Double
+  ~distance : Double
+  ~hasChild : Bool
+  ~init(radius:diffuse:specular:emission:normal:anxisTime:revolTime:distance:hasChild:) 
+}
+class "PlanetEnum" as PlanetEnum << (E, AntiqueWhite) enum >> { 
+  ~sun
+  ~mercury
+  ~venus
+  ~earth
+  ~moon
+  ~mars
+  ~jupiter
+  ~saturn
+  ~uranus
+  ~neptune
+  ~getPlanet() 
+}
+class "VirtualObjectARView" as VirtualObjectARView << (C, AntiqueWhite) class >> { 
+  ~virtualObject(at:)
+  ~worldPosition(fromScreenPosition:objectPosition:infinitePlane:)
+  ~hitTestRayFromScreenPosition(_:)
+  ~hitTestWithInfiniteHorizontalPlane(_:_:)
+  ~hitTestWithFeatures(_:coneOpeningAngleInDegrees:minDistance:maxDistance:maxResults:)
+  ~hitTestWithFeatures(_:) 
+}
+class "FocusSquare" as FocusSquare << (C, AntiqueWhite) class >> { 
+  ~{static} size : Float
+  ~{static} thickness : Float
+  ~{static} scaleForClosedSquare : Float
+  ~{static} sideLengthForOpenSegments : CGFloat
+  ~{static} animationDuration
+  ~{static} primaryColor
+  ~{static} fillColor
+  ~lastPosition : SIMD3<Float>?
+  ~state : State
+  -isOpen
+  -isAnimating
+  -recentFocusSquarePositions : [SIMD3<Float>]
+  -anchorsOfVisitedPlanes : Set<ARAnchor>
+  -segments : [FocusSquare.Segment]
+  -positioningNode
+  ~init()
+  ~init(coder:)
+  ~hide()
+  ~unhide()
+  -displayAsBillboard()
+  -displayAsOpen(at:camera:)
+  -displayAsClosed(at:planeAnchor:camera:)
+  -updateTransform(for:camera:)
+  -normalize(_:forMinimalRotationTo:)
+  -scaleBasedOnDistance(camera:)
+  -performOpenAnimation()
+  -performCloseAnimation(flash:)
+  -scaleAnimation(for:)
+  ~displayNodeHierarchyOnTop(_:)
+  -fillPlane : SCNNode 
+}
+class "SolarSystemPresentationLogic" as SolarSystemPresentationLogic << (P, AntiqueWhite) protocol >> {  
+}
+class "SolarSystemPresenter" as SolarSystemPresenter << (C, AntiqueWhite) class >> { 
+  ~viewController : SolarSystemDisplayLogic? 
+}
+UIViewController <|-- SolarSystemViewController
+SolarSystemDisplayLogic <|.. SolarSystemViewController
+SolarSystemRoutingLogic <|.. SolarSystemRouter
+SolarSystemDataPassing <|.. SolarSystemRouter
+SolarSystemBusinessLogic <|.. SolarSystemInteractor
+SolarSystemDataStore <|.. SolarSystemInteractor
+UIGestureRecognizerDelegate <|-- VirtualObjectInteraction
+UIPanGestureRecognizer <|-- ThresholdPanGesture
+SCNNode <|-- PlanetLoop
+SCNNode <|-- PlanetNode
+ARSCNView <|-- VirtualObjectARView
+SCNNode <|-- FocusSquare
+SolarSystemPresentationLogic <|.. SolarSystemPresenter
+
+@enduml

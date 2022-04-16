@@ -1,0 +1,241 @@
+@startuml
+' STYLE START
+hide empty members
+skinparam sequenceMessageAlign center
+skinparam classFontSize 14
+' STYLE END
+
+
+class "ConfigCollection" as ConfigCollection << (S, AntiqueWhite) struct >> { 
+  ~sizeOfFirstCell : Int
+  ~showNavbar : Bool
+  ~image : [String]
+  ~text : [String]
+  ~hasCustomCells : Bool
+  ~nextCollections : [String]
+  ~items : [String]
+  ~viewTitle : String
+  ~parentTitle : String 
+}
+class "SpaceObject" as SpaceObject << (S, AntiqueWhite) struct >> { 
+  ~radiusRatio : Float
+  ~orbitRatio : Float
+  ~orbitSpeed : Float
+  ~selfSpeed : Float
+  ~isSatellite : Bool
+  ~parent : String
+  ~diffuse : String
+  ~emission : String
+  ~normal : String
+  ~specular : String
+  ~notRounded : Bool
+  ~fileExtension : String
+  ~initScale : Float 
+}
+class "PlanetManager" as PlanetManager << (C, AntiqueWhite) class >> { 
+  ~Objects : [Planet]
+  ~ChoosenObject : Planet?
+  ~addPlanet(name:_:relativeTo:)
+  ~findParent(ParentName:)
+  ~findNodeInComplexObject(node:parent:)
+  ~setChoosenByNode(node:)
+  ~setChoosen(obj:) 
+}
+class "ViewControllerDelegate" as ViewControllerDelegate << (P, AntiqueWhite) protocol >> { 
+  ~chooseObject()
+  ~loseObject() 
+}
+class "SceneController" as SceneController << (C, AntiqueWhite) class >> { 
+  ~nameObj : String
+  ~vc : ViewControllerDelegate?
+  ~isChoosen
+  ~sceneView
+  ~configuration
+  ~manager
+  ~setup()
+  ~gestureRecognizer() 
+}
+class "NotchViewController" as NotchViewController << (C, AntiqueWhite) class >> { 
+  ~handleView : UIView
+  ~viewDidLoad() 
+}
+class "SceneControllerDelegate" as SceneControllerDelegate << (P, AntiqueWhite) protocol >> { 
+  ~setupObjectName(name:) 
+}
+class "SheetVcDelegate" as SheetVcDelegate << (P, AntiqueWhite) protocol >> { 
+  ~close() 
+}
+class "SheetViewController" as SheetViewController << (C, AntiqueWhite) class >> { 
+  ~close()
+  ~containerVC : ContainerViewController
+  ~notchVC : NotchViewController
+  ~heightConstraint : NSLayoutConstraint!
+  ~notchBottomConstraint : NSLayoutConstraint!
+  +blackOverlay : UIControl
+  ~viewDidLoad()
+  ~viewDidAppear(_:)
+  ~setupContainerView() 
+}
+class "CustomViewController" as CustomViewController << (C, AntiqueWhite) class >> { 
+  ~sc : SceneControllerDelegate?
+  ~parentVC : SheetVcDelegate?
+  ~titleCollection : UILabel
+  ~i : String!
+  ~init(_:)
+  -mainCollection : UICollectionView
+  ~init(coder:)
+  ~viewDidLoad()
+  ~viewWillAppear(_:)
+  -setupNavigationController(navigationVC:) 
+}
+class "ContainerViewController" as ContainerViewController << (C, AntiqueWhite) class >> { 
+  ~rootVC : UIViewController
+  ~init(rootViewController:)
+  ~init(coder:)
+  ~viewDidLoad()
+  ~pushViewController(_:animated:) 
+}
+class "Planet" as Planet << (C, AntiqueWhite) class >> { 
+  ~object
+  ~root
+  ~orbitView
+  ~titleView
+  ~global : Planet?
+  ~charectiristic : SpaceObject
+  ~orbitRoot
+  ~currentAngleY : Float
+  ~currentAngleX : Float
+  ~scaleState : Float
+  ~RadToDist : Float
+  ~isSpinning
+  ~titleConst : Float
+  ~pipeConst : Float
+  -angle : Float
+  ~init(params:name:parent:_:relativeTo:)
+  ~setupObject()
+  ~setupOrbit()
+  ~setupText()
+  ~SetDiffuse()
+  ~pauseAnimation()
+  ~animate()
+  ~setPosition(_:relativeTo:smoothMovement:)
+  -setRotation(time:)
+  -compensation(time:)
+  ~zoom(radius:)
+  ~changePosition(pos:)
+  ~fixRatio(radiusY:radiusOrbit:)
+  ~setRadius(SunRasius:)
+  ~setScaling(distance:)
+  ~constr : Float
+  ~textStab(x:y:) 
+}
+class "ServicesArPlanetDisplayLogic" as ServicesArPlanetDisplayLogic << (P, AntiqueWhite) protocol >> { 
+  ~displaySomething(viewModel:) 
+}
+class "ServicesArPlanetViewController" as ServicesArPlanetViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : ServicesArPlanetBusinessLogic?
+  ~router : (NSObjectProtocol & ServicesArPlanetRoutingLogic & ServicesArPlanetDataPassing)?
+  ~init(nibName:bundle:)
+  ~init(coder:)
+  -setup()
+  ~prepare(for:sender:)
+  ~viewDidLoad()
+  ~doSomething()
+  ~displaySomething(viewModel:) 
+}
+class "ServicesArPlanet" as ServicesArPlanet << (E, AntiqueWhite) enum >> {  
+}
+class "ServicesArPlanetWorker" as ServicesArPlanetWorker << (C, AntiqueWhite) class >> { 
+  ~doSomeWork() 
+}
+class "ServicesArPlanetBusinessLogic" as ServicesArPlanetBusinessLogic << (P, AntiqueWhite) protocol >> { 
+  ~doSomething(request:) 
+}
+class "ServicesArPlanetDataStore" as ServicesArPlanetDataStore << (P, AntiqueWhite) protocol >> {  
+}
+class "ServicesArPlanetInteractor" as ServicesArPlanetInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : ServicesArPlanetPresentationLogic?
+  ~worker : ServicesArPlanetWorker?
+  ~doSomething(request:) 
+}
+class "ServicesArPlanetRoutingLogic" as ServicesArPlanetRoutingLogic << (P, AntiqueWhite) protocol >> {  
+}
+class "ServicesArPlanetDataPassing" as ServicesArPlanetDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : ServicesArPlanetDataStore? 
+}
+class "ServicesArPlanetRouter" as ServicesArPlanetRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : ServicesArPlanetViewController?
+  ~dataStore : ServicesArPlanetDataStore? 
+}
+class "ServicesArPlanetPresentationLogic" as ServicesArPlanetPresentationLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentSomething(response:) 
+}
+class "ServicesArPlanetPresenter" as ServicesArPlanetPresenter << (C, AntiqueWhite) class >> { 
+  ~presentSomething(response:)
+  ~viewController : ServicesArPlanetDisplayLogic? 
+}
+class "ServicesArPlanetDisplayLogic" as ServicesArPlanetDisplayLogic0 << (P, AntiqueWhite) protocol >> { 
+  ~displaySomething(viewModel:) 
+}
+class "ServicesArPlanetViewController" as ServicesArPlanetViewController1 << (C, AntiqueWhite) class >> { 
+  ~restartExperienceHandler : () -> Void
+  ~isRestartAvailable
+  ~virtualObjectInteraction
+  ~isObjectVisible
+  ~screenCenter : CGPoint
+  ~updateQueue
+  ~coachingOverlay
+  ~containerView
+  ~hidingDistance
+  ~showingDistance
+  ~buttonSetObject
+  ~setObjBottomConst : NSLayoutConstraint?
+  ~addBottomConst : NSLayoutConstraint?
+  ~spinAutoBottomConst : NSLayoutConstraint?
+  ~removeBottomConst : NSLayoutConstraint?
+  ~focusSquare
+  ~chooseObject()
+  ~loseObject()
+  ~setupObjectName(name:)
+  ~sceneView
+  ~sheetVc
+  ~interactor : ServicesArPlanetBusinessLogic?
+  ~router : (NSObjectProtocol & ServicesArPlanetRoutingLogic & ServicesArPlanetDataPassing)?
+  ~buttonBack
+  ~buttonClear
+  ~buttonInfo
+  ~buttonAdd
+  ~photoButton
+  ~buttonAutoSpin
+  ~buttonRemove
+  ~isSystem
+  ~init(nibName:bundle:)
+  ~init(coder:)
+  -setup()
+  ~prepare(for:sender:)
+  ~viewDidLoad()
+  ~viewWillAppear(_:)
+  ~doSomething()
+  ~displaySomething(viewModel:) 
+}
+ARSCNView <|-- SceneController
+ARSCNViewDelegate <|-- SceneController
+SheetVcDelegate <|.. SheetViewController
+CustomLayoutDelegate <|-- CustomViewController
+UICollectionViewDelegate <|-- CustomViewController
+UICollectionViewDataSource <|-- CustomViewController
+UINavigationController <|-- ContainerViewController
+UIViewController <|-- ServicesArPlanetViewController
+ServicesArPlanetDisplayLogic <|.. ServicesArPlanetViewController
+ServicesArPlanetBusinessLogic <|.. ServicesArPlanetInteractor
+ServicesArPlanetDataStore <|.. ServicesArPlanetInteractor
+ServicesArPlanetRoutingLogic <|.. ServicesArPlanetRouter
+ServicesArPlanetDataPassing <|.. ServicesArPlanetRouter
+ServicesArPlanetPresentationLogic <|.. ServicesArPlanetPresenter
+UIViewController <|-- ServicesArPlanetViewController
+ServicesArPlanetDisplayLogic <|.. ServicesArPlanetViewController
+ViewControllerDelegate <|.. ServicesArPlanetViewController
+ARSCNViewDelegate <|-- ServicesArPlanetViewController
+SceneControllerDelegate <|.. ServicesArPlanetViewController
+
+@enduml

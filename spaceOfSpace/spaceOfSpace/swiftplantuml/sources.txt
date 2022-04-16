@@ -1,662 +1,152 @@
 @startuml
 ' STYLE START
 hide empty members
-skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam classFontSize 14
 ' STYLE END
 
 
-class "ApodBusinessLogic" as ApodBusinessLogic << (P, GoldenRod) protocol >> { 
-  ~doSomething(request:)
-  ~loadImg(request:) 
+class "NewsWebBrowserRoutingLogic" as NewsWebBrowserRoutingLogic << (P, AntiqueWhite) protocol >> {  
 }
-class "ApodDataStore" as ApodDataStore << (P, GoldenRod) protocol >> { 
-  ~url : String 
+class "NewsWebBrowserDataPassing" as NewsWebBrowserDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : NewsWebBrowserDataStore? 
 }
-class "ApodInteractor" as ApodInteractor << (C, DarkSeaGreen) >> { 
-  ~url : String
-  ~presenter : ApodPresentationLogic?
-  ~worker : ApodWorker?
-  ~doSomething(request:)
-  ~loadImg(request:) 
+class "NewsWebBrowserRouter" as NewsWebBrowserRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : NewsWebBrowserViewController?
+  ~dataStore : NewsWebBrowserDataStore? 
 }
-class "ApodDisplayLogic" as ApodDisplayLogic << (P, GoldenRod) protocol >> { 
-  ~displayImg(viewModel:) 
+class "NewsWebBrowserWorker" as NewsWebBrowserWorker << (C, AntiqueWhite) class >> { 
+  ~doSomeWork() 
 }
-class "ApodViewController" as ApodViewController << (C, DarkSeaGreen) >> { 
-  ~canHideElem()
-  ~myScrollView : SMScrollView?
-  ~interactor : ApodBusinessLogic?
-  ~router : (NSObjectProtocol & ApodRoutingLogic & ApodDataPassing)?
-  ~buttonBack
-  ~buttonInfo
-  ~buttonRefresh
-  ~buttonSave
-  ~labelTitle
-  ~viewDescription
-  ~isHidden : Int
-  ~buttonSaveTopConstraint : NSLayoutConstraint?
-  ~buttonInfoTopConstraint : NSLayoutConstraint?
-  ~buttonRefreshTopConstraint : NSLayoutConstraint?
-  ~buttonBackTopConstraint : NSLayoutConstraint?
-  ~labelTitleBottomConstraint : NSLayoutConstraint?
-  ~isPhotoLoaded
-  ~loader : UIActivityIndicatorView
-  ~init(nibName:bundle:)
-  ~init(coder:)
-  -setup()
-  ~prepare(for:sender:)
+class "NewsWebBrowserDisplayLogic" as NewsWebBrowserDisplayLogic << (P, AntiqueWhite) protocol >> { 
+  ~displayWebBrowser(viewModel:) 
+}
+class "NewsWebBrowserViewController" as NewsWebBrowserViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : NewsWebBrowserBusinessLogic?
+  ~router : (NewsWebBrowserRoutingLogic & NewsWebBrowserDataPassing)?
   ~viewDidLoad()
-  ~gestureRecognizer()
-  ~setImg()
-  ~displayImg(viewModel:)
-  ~downloadImage(from:) 
-}
-class "ApodRoutingLogic" as ApodRoutingLogic << (P, GoldenRod) protocol >> {  
-}
-class "ApodDataPassing" as ApodDataPassing << (P, GoldenRod) protocol >> { 
-  ~dataStore : ApodDataStore? 
-}
-class "ApodRouter" as ApodRouter << (C, DarkSeaGreen) >> { 
-  ~viewController : ApodViewController?
-  ~dataStore : ApodDataStore? 
-}
-class "ImageScrollView" as ImageScrollView << (C, DarkSeaGreen) >> { 
-  ~imageZoomView : UIImageView!
-  ~zoomingTap : UITapGestureRecognizer
-  ~init(frame:)
-  ~init(coder:)
-  ~set(image:)
-  ~configurateFor(imageSize:)
-  ~layoutSubviews()
-  ~setCurrentMaxandMinZoomScale()
-  ~centerImage()
-  ~handleZoomingTap(sender:)
-  ~zoom(point:animated:)
-  ~zoomRect(scale:center:)
-  ~viewForZooming(in:)
-  ~scrollViewDidZoom(_:) 
-}
-class "MainVCDelegate" as MainVCDelegate << (P, GoldenRod) protocol >> { 
-  ~canHideElem() 
-}
-class "DescriptionViewController" as DescriptionViewController << (C, DarkSeaGreen) >> { 
-  ~md : MainVCDelegate?
-  ~containerVC : ContainerVC
-  ~notchVC : NotchViewController
-  ~closeButton : UIButton
-  ~blurredEffectView : UIVisualEffectView
-  ~heightConstraint : NSLayoutConstraint!
-  ~notchBottomConstraint : NSLayoutConstraint!
-  +blackOverlay : UIControl
-  ~viewDidLoad()
-  ~viewDidAppear(_:)
-  ~setupContainerView() 
-}
-class "Description" as Description << (C, DarkSeaGreen) >> { 
-  ~titleImg : String
-  ~DescText : String
-  ~DescView : UITextView
-  ~loading : UIActivityIndicatorView
-  ~viewDidLoad()
-  ~viewWillAppear(_:)
-  -setupNavigationController(title:navigationVC:) 
-}
-class "ContainerVC" as ContainerVC << (C, DarkSeaGreen) >> { 
-  ~rootVC : UIViewController
-  ~init(rootViewController:)
-  ~init(coder:)
-  ~viewDidLoad()
-  ~pushViewController(_:animated:) 
-}
-class "ApodWorker" as ApodWorker << (C, DarkSeaGreen) >> { 
-  ~doSomeWork()
-  ~getUrl(completion:)
-  -getImgUrl(js:) 
-}
-class "Apod" as Apod << (E, LightSteelBlue) enum >> {  
-}
-class "ApodPresentationLogic" as ApodPresentationLogic << (P, GoldenRod) protocol >> { 
-  ~presentSomething(response:)
-  ~presentImg(response:) 
-}
-class "ApodPresenter" as ApodPresenter << (C, DarkSeaGreen) >> { 
-  ~viewController : ApodDisplayLogic?
-  ~presentSomething(response:)
-  ~presentImg(response:) 
-}
-class "ServicesPresentationLogic" as ServicesPresentationLogic << (P, GoldenRod) protocol >> { 
-  ~presentSomething(response:) 
-}
-class "ServicesPresenter" as ServicesPresenter << (C, DarkSeaGreen) >> { 
-  ~viewController : ServicesDisplayLogic?
-  ~presentSomething(response:) 
-}
-class "ServicesBusinessLogic" as ServicesBusinessLogic << (P, GoldenRod) protocol >> { 
-  ~doSomething(request:) 
-}
-class "ServicesDataStore" as ServicesDataStore << (P, GoldenRod) protocol >> {  
-}
-class "ServicesInteractor" as ServicesInteractor << (C, DarkSeaGreen) >> { 
-  ~presenter : ServicesPresentationLogic?
-  ~worker : ServicesWorker?
-  ~doSomething(request:) 
-}
-class "ServicesCell" as ServicesCell << (C, DarkSeaGreen) >> { 
-  ~cellView : UIView
-  ~cellLabel : UILabel
-  ~cellImg : UIImageView
-  ~cellDesc : UILabel
-  ~init(style:reuseIdentifier:)
-  ~setupView()
-  ~init(coder:) 
-}
-class "ServicesCell" as ServicesCell0 << (C, DarkSeaGreen) >> { 
-  ~cellView : UIView
-  ~cellLabel : UILabel
-  ~cellImg : UIImageView
-  ~cellDesc : UILabel
-  ~init(style:reuseIdentifier:)
-  ~setupView()
-  ~init(coder:) 
-}
-class "ServicesDisplayLogic" as ServicesDisplayLogic << (P, GoldenRod) protocol >> { 
-  ~displaySomething(viewModel:) 
-}
-class "ServicesViewController" as ServicesViewController << (C, DarkSeaGreen) >> { 
   ~deinit
-  ~tableview : UITableView
-  ~interactor : ServicesBusinessLogic?
-  ~router : (NSObjectProtocol & ServicesRoutingLogic & ServicesDataPassing)?
-  ~init(nibName:bundle:)
-  ~init(coder:)
+  -progress
+  -urlToShow : URL?
+  ~webView : WKWebView
+  ~progressView : UIProgressView
+  -setupUI()
+  -shareButtonTapped()
+  ~displayWebBrowser(viewModel:) 
+}
+class "NewsWebBrowser" as NewsWebBrowser << (E, AntiqueWhite) enum >> {  
+}
+class "NewsWebBrowserPresentationLogic" as NewsWebBrowserPresentationLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentHyperlink(url:) 
+}
+class "NewsWebBrowserPresenter" as NewsWebBrowserPresenter << (C, AntiqueWhite) class >> { 
+  ~viewController : NewsWebBrowserDisplayLogic?
+  ~presentHyperlink(url:) 
+}
+class "NewsWebConfigurator" as NewsWebConfigurator << (C, AntiqueWhite) class >> { 
+  ~{static} build() 
+}
+class "NewsWebBrowserBusinessLogic" as NewsWebBrowserBusinessLogic << (P, AntiqueWhite) protocol >> { 
+  ~getHyperlink() 
+}
+class "NewsWebBrowserDataStore" as NewsWebBrowserDataStore << (P, AntiqueWhite) protocol >> { 
+  ~hyperlink : String? 
+}
+class "NewsWebBrowserInteractor" as NewsWebBrowserInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : NewsWebBrowserPresentationLogic?
+  ~worker : NewsWebBrowserWorker?
+  ~hyperlink : String?
+  ~getHyperlink() 
+}
+class "DisplayedObject" as DisplayedObject << (P, AntiqueWhite) protocol >> {  
+}
+class "NewsModel" as NewsModel << (E, AntiqueWhite) enum >> {  
+}
+class "NewsBusinessLogic" as NewsBusinessLogic << (P, AntiqueWhite) protocol >> { 
+  ~fetchNews(request:) 
+}
+class "NewsDataStore" as NewsDataStore << (P, AntiqueWhite) protocol >> { 
+  ~news : [News?] 
+}
+class "NewsInteractor" as NewsInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : NewsPresentationLogic?
+  ~worker : NewsWorker?
+  ~news : [News?]
+  ~fetchNews(request:) 
+}
+class "NewsWorkerLogic" as NewsWorkerLogic << (P, AntiqueWhite) protocol >> { 
+  ~fetch(startFetchFrom:success:) 
+}
+class "NewsWorker" as NewsWorker << (C, AntiqueWhite) class >> { 
+  ~newsManager
+  ~fetch(startFetchFrom:success:) 
+}
+class "NewsRoutingLogic" as NewsRoutingLogic << (P, AntiqueWhite) protocol >> { 
+  ~routeToShowBrowser() 
+}
+class "NewsDataPassing" as NewsDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : NewsDataStore? 
+}
+class "NewsRouter" as NewsRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : NewsViewController?
+  ~dataStore : NewsDataStore?
+  ~routeToShowBrowser()
+  ~passDataToNewsWebBrowser(source:destination:) 
+}
+class "NewsPresentationLogic" as NewsPresentationLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentFetchedNews(response:) 
+}
+class "NewsPresenter" as NewsPresenter << (C, AntiqueWhite) class >> { 
+  ~viewController : NewsDisplayLogic?
+  ~dateFormatter : DateFormatter
+  ~presentFetchedNews(response:)
+  -formatFetchedNews(arrayOfNews:)
+  -formatTime(for:) 
+}
+class "NewsDisplayLogic" as NewsDisplayLogic << (P, AntiqueWhite) protocol >> { 
+  ~displayFetchedObjects(viewModel:) 
+}
+class "NewsViewController" as NewsViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : NewsBusinessLogic?
+  ~router : (NewsRoutingLogic & NewsDataPassing)?
   -setup()
-  ~prepare(for:sender:)
-  ~viewDidLoad()
-  ~doSomething()
-  ~displaySomething(viewModel:) 
-}
-class "ConfigCollection" as ConfigCollection << (S, SkyBlue) struct >> { 
-  ~sizeOfFirstCell : Int
-  ~showNavbar : Bool
-  ~image : [String]
-  ~text : [String]
-  ~hasCustomCells : Bool
-  ~nextCollections : [String]
-  ~items : [String]
-  ~viewTitle : String
-  ~parentTitle : String 
-}
-class "SpaceObject" as SpaceObject << (S, SkyBlue) struct >> { 
-  ~radiusRatio : Float
-  ~orbitRatio : Float
-  ~orbitSpeed : Float
-  ~selfSpeed : Float
-  ~isSatellite : Bool
-  ~parent : String
-  ~diffuse : String
-  ~emission : String
-  ~normal : String
-  ~specular : String
-  ~notRounded : Bool
-  ~fileExtension : String
-  ~initScale : Float 
-}
-class "PlanetManager" as PlanetManager << (C, DarkSeaGreen) >> { 
-  ~Objects : [Planet]
-  ~ChoosenObject : Planet?
-  ~addPlanet(name:_:relativeTo:)
-  ~findParent(ParentName:)
-  ~findNodeInComplexObject(node:parent:)
-  ~setChoosenByNode(node:)
-  ~setChoosen(obj:) 
-}
-class "ViewControllerDelegate" as ViewControllerDelegate << (P, GoldenRod) protocol >> { 
-  ~chooseObject()
-  ~loseObject() 
-}
-class "SceneController" as SceneController << (C, DarkSeaGreen) >> { 
-  ~nameObj : String
-  ~vc : ViewControllerDelegate?
-  ~isChoosen
-  ~sceneView
-  ~configuration
-  ~manager
-  ~setup()
-  ~gestureRecognizer() 
-}
-class "NotchViewController" as NotchViewController << (C, DarkSeaGreen) >> { 
-  ~handleView : UIView
-  ~viewDidLoad() 
-}
-class "SceneControllerDelegate" as SceneControllerDelegate << (P, GoldenRod) protocol >> { 
-  ~setupObjectName(name:) 
-}
-class "SheetVcDelegate" as SheetVcDelegate << (P, GoldenRod) protocol >> { 
-  ~close() 
-}
-class "SheetViewController" as SheetViewController << (C, DarkSeaGreen) >> { 
-  ~close()
-  ~containerVC : ContainerViewController
-  ~notchVC : NotchViewController
-  ~heightConstraint : NSLayoutConstraint!
-  ~notchBottomConstraint : NSLayoutConstraint!
-  +blackOverlay : UIControl
-  ~viewDidLoad()
-  ~viewDidAppear(_:)
-  ~setupContainerView() 
-}
-class "CustomViewController" as CustomViewController << (C, DarkSeaGreen) >> { 
-  ~sc : SceneControllerDelegate?
-  ~parentVC : SheetVcDelegate?
-  ~titleCollection : UILabel
-  ~i : String!
-  ~init(_:)
-  -mainCollection : UICollectionView
-  ~init(coder:)
   ~viewDidLoad()
   ~viewWillAppear(_:)
-  -setupNavigationController(navigationVC:) 
+  ~tableView : UITableView
+  ~startFetchFrom : Int
+  ~isPaginating : Bool
+  ~spinnerView
+  ~spinnerFooterView
+  -displayedObjects
+  -setupUI()
+  ~displayFetchedObjects(viewModel:) 
 }
-class "ContainerViewController" as ContainerViewController << (C, DarkSeaGreen) >> { 
-  ~rootVC : UIViewController
-  ~init(rootViewController:)
+class "NewsCell" as NewsCell << (C, AntiqueWhite) class >> { 
+  ~{static} identifier : String
+  ~newsImage
+  ~newsTitle
+  ~newsContent
+  ~newsSource
+  ~init(style:reuseIdentifier:)
   ~init(coder:)
-  ~viewDidLoad()
-  ~pushViewController(_:animated:) 
+  ~awakeFromNib()
+  ~setSelected(_:animated:)
+  -setupCell()
+  -setupAutoLayout() 
 }
-class "Planet" as Planet << (C, DarkSeaGreen) >> { 
-  ~object
-  ~root
-  ~orbitView
-  ~titleView
-  ~global : Planet?
-  ~charectiristic : SpaceObject
-  ~orbitRoot
-  ~currentAngleY : Float
-  ~currentAngleX : Float
-  ~scaleState : Float
-  ~RadToDist : Float
-  ~isSpinning
-  ~titleConst : Float
-  ~pipeConst : Float
-  -angle : Float
-  ~init(params:name:parent:_:relativeTo:)
-  ~setupObject()
-  ~setupOrbit()
-  ~setupText()
-  ~SetDiffuse()
-  ~pauseAnimation()
-  ~animate()
-  ~setPosition(_:relativeTo:smoothMovement:)
-  -setRotation(time:)
-  -compensation(time:)
-  ~zoom(radius:)
-  ~changePosition(pos:)
-  ~fixRatio(radiusY:radiusOrbit:)
-  ~setRadius(SunRasius:)
-  ~setScaling(distance:)
-  ~constr : Float
-  ~textStab(x:y:) 
-}
-class "ServicesArPlanetDisplayLogic" as ServicesArPlanetDisplayLogic << (P, GoldenRod) protocol >> { 
-  ~displaySomething(viewModel:) 
-}
-class "ServicesArPlanetViewController" as ServicesArPlanetViewController << (C, DarkSeaGreen) >> { 
-  ~interactor : ServicesArPlanetBusinessLogic?
-  ~router : (NSObjectProtocol & ServicesArPlanetRoutingLogic & ServicesArPlanetDataPassing)?
-  ~init(nibName:bundle:)
-  ~init(coder:)
-  -setup()
-  ~prepare(for:sender:)
-  ~viewDidLoad()
-  ~doSomething()
-  ~displaySomething(viewModel:) 
-}
-class "ServicesArPlanet" as ServicesArPlanet << (E, LightSteelBlue) enum >> {  
-}
-class "ServicesArPlanetWorker" as ServicesArPlanetWorker << (C, DarkSeaGreen) >> { 
-  ~doSomeWork() 
-}
-class "ServicesArPlanetBusinessLogic" as ServicesArPlanetBusinessLogic << (P, GoldenRod) protocol >> { 
-  ~doSomething(request:) 
-}
-class "ServicesArPlanetDataStore" as ServicesArPlanetDataStore << (P, GoldenRod) protocol >> {  
-}
-class "ServicesArPlanetInteractor" as ServicesArPlanetInteractor << (C, DarkSeaGreen) >> { 
-  ~presenter : ServicesArPlanetPresentationLogic?
-  ~worker : ServicesArPlanetWorker?
-  ~doSomething(request:) 
-}
-class "ServicesArPlanetRoutingLogic" as ServicesArPlanetRoutingLogic << (P, GoldenRod) protocol >> {  
-}
-class "ServicesArPlanetDataPassing" as ServicesArPlanetDataPassing << (P, GoldenRod) protocol >> { 
-  ~dataStore : ServicesArPlanetDataStore? 
-}
-class "ServicesArPlanetRouter" as ServicesArPlanetRouter << (C, DarkSeaGreen) >> { 
-  ~viewController : ServicesArPlanetViewController?
-  ~dataStore : ServicesArPlanetDataStore? 
-}
-class "ServicesArPlanetPresentationLogic" as ServicesArPlanetPresentationLogic << (P, GoldenRod) protocol >> { 
-  ~presentSomething(response:) 
-}
-class "ServicesArPlanetPresenter" as ServicesArPlanetPresenter << (C, DarkSeaGreen) >> { 
-  ~presentSomething(response:)
-  ~viewController : ServicesArPlanetDisplayLogic? 
-}
-class "ServicesArPlanetDisplayLogic" as ServicesArPlanetDisplayLogic1 << (P, GoldenRod) protocol >> { 
-  ~displaySomething(viewModel:) 
-}
-class "ServicesArPlanetViewController" as ServicesArPlanetViewController2 << (C, DarkSeaGreen) >> { 
-  ~restartExperienceHandler : () -> Void
-  ~isRestartAvailable
-  ~virtualObjectInteraction
-  ~isObjectVisible
-  ~screenCenter : CGPoint
-  ~updateQueue
-  ~coachingOverlay
-  ~containerView
-  ~hidingDistance
-  ~showingDistance
-  ~buttonSetObject
-  ~setObjBottomConst : NSLayoutConstraint?
-  ~addBottomConst : NSLayoutConstraint?
-  ~spinAutoBottomConst : NSLayoutConstraint?
-  ~removeBottomConst : NSLayoutConstraint?
-  ~focusSquare
-  ~chooseObject()
-  ~loseObject()
-  ~setupObjectName(name:)
-  ~sceneView
-  ~sheetVc
-  ~interactor : ServicesArPlanetBusinessLogic?
-  ~router : (NSObjectProtocol & ServicesArPlanetRoutingLogic & ServicesArPlanetDataPassing)?
-  ~buttonBack
-  ~buttonClear
-  ~buttonInfo
-  ~buttonAdd
-  ~photoButton
-  ~buttonAutoSpin
-  ~buttonRemove
-  ~isSystem
-  ~init(nibName:bundle:)
-  ~init(coder:)
-  -setup()
-  ~prepare(for:sender:)
-  ~viewDidLoad()
-  ~viewWillAppear(_:)
-  ~doSomething()
-  ~displaySomething(viewModel:) 
-}
-class "SolarSystem" as SolarSystem << (E, LightSteelBlue) enum >> {  
-}
-class "SolarSystemDisplayLogic" as SolarSystemDisplayLogic << (P, GoldenRod) protocol >> {  
-}
-class "SolarSystemViewController" as SolarSystemViewController << (C, DarkSeaGreen) >> { 
-  ~interactor : SolarSystemBusinessLogic?
-  ~router : (NSObjectProtocol & SolarSystemRoutingLogic & SolarSystemDataPassing)?
-  -setup()
-  ~prepare(for:sender:)
-  ~containerView
-  ~coachingOverlay
-  ~sceneView : VirtualObjectARView
-  -focusSquare
-  ~backButton : UIButton
-  ~clearButton : UIButton
-  ~addSolarSystemButton : UIButton
-  ~isSpinnng : Bool
-  ~spinButton : UIButton
-  ~restartExperienceHandler : () -> Void
-  ~virtualObjectInteraction
-  ~isObjectVisible
-  ~sunNode
-  ~isRestartAvailable
-  ~updateQueue
-  ~screenCenter : CGPoint
-  ~session : ARSession
-  ~viewDidLoad()
-  ~viewWillAppear(_:)
-  ~viewWillDisappear(_:)
-  ~initSceneView()
-  ~initPlanetNode()
-  ~initSunNode()
-  ~setupCamera()
-  ~resetTracking()
-  ~updateFocusSquare()
-  ~restartExperience()
-  ~displayErrorMessage(title:message:) 
-}
-class "SolarSystemRoutingLogic" as SolarSystemRoutingLogic << (P, GoldenRod) protocol >> {  
-}
-class "SolarSystemDataPassing" as SolarSystemDataPassing << (P, GoldenRod) protocol >> { 
-  ~dataStore : SolarSystemDataStore? 
-}
-class "SolarSystemRouter" as SolarSystemRouter << (C, DarkSeaGreen) >> { 
-  ~viewController : SolarSystemViewController?
-  ~dataStore : SolarSystemDataStore? 
-}
-class "SolarSystemWorker" as SolarSystemWorker << (C, DarkSeaGreen) >> {  
-}
-class "SolarSystemBusinessLogic" as SolarSystemBusinessLogic << (P, GoldenRod) protocol >> {  
-}
-class "SolarSystemDataStore" as SolarSystemDataStore << (P, GoldenRod) protocol >> {  
-}
-class "SolarSystemInteractor" as SolarSystemInteractor << (C, DarkSeaGreen) >> { 
-  ~presenter : SolarSystemPresentationLogic?
-  ~worker : SolarSystemWorker? 
-}
-class "VirtualObjectInteraction" as VirtualObjectInteraction << (C, DarkSeaGreen) >> { 
-  ~translateAssumingInfinitePlane
-  ~sceneView : VirtualObjectARView
-  ~selectedObject : PlanetNode?
-  -trackedObject : PlanetNode?
-  -currentTrackingPosition : CGPoint?
-  ~init(sceneView:)
-  ~didPan(_:)
-  ~updateObjectToCurrentTrackingPosition()
-  ~didRotate(_:)
-  ~didTap(_:)
-  ~gestureRecognizer(_:shouldRecognizeSimultaneouslyWith:)
-  -objectInteracting(with:in:)
-  -translate(_:basedOn:infinitePlane:) 
-}
-class "ThresholdPanGesture" as ThresholdPanGesture << (C, DarkSeaGreen) >> { 
-  ~isThresholdExceeded
-  ~state : UIGestureRecognizer.State
-  -{static} threshold(forTouchCount:)
-  ~touchesMoved(_:with:) 
-}
-class "PlanetLoop" as PlanetLoop << (C, DarkSeaGreen) >> { 
-  ~init(planet:)
-  ~init(coder:) 
-}
-class "PlanetNode" as PlanetNode << (C, DarkSeaGreen) >> { 
-  ~planetType : PlanetEnum
-  ~node : SCNNode?
-  -recentVirtualObjectDistances
-  ~reset()
-  ~init(planet:)
-  ~setPosition(_:relativeTo:smoothMovement:)
-  ~adjustOntoPlaneAnchor(_:using:)
-  ~addPlanet(planet:)
-  ~addPlanet(planetNode:)
-  -getPlanetOrbit(planet:)
-  -addPlanetLoop(planet:)
-  -addLight(planet:)
-  -getPlanetRotation(duration:)
-  ~init(coder:) 
-}
-class "SolarPlanet" as SolarPlanet << (C, DarkSeaGreen) >> { 
-  ~diffuse : UIImage
-  ~specular : UIImage?
-  ~emission : UIImage?
-  ~normal : UIImage?
-  ~radius : CGFloat
-  ~anxisTime : Double
-  ~revolutionTime : Double
-  ~distance : Double
-  ~hasChild : Bool
-  ~init(radius:diffuse:specular:emission:normal:anxisTime:revolTime:distance:hasChild:) 
-}
-class "PlanetEnum" as PlanetEnum << (E, LightSteelBlue) enum >> { 
-  ~sun
-  ~mercury
-  ~venus
-  ~earth
-  ~moon
-  ~mars
-  ~jupiter
-  ~saturn
-  ~uranus
-  ~neptune
-  ~getPlanet() 
-}
-class "VirtualObjectARView" as VirtualObjectARView << (C, DarkSeaGreen) >> { 
-  ~virtualObject(at:)
-  ~worldPosition(fromScreenPosition:objectPosition:infinitePlane:)
-  ~hitTestRayFromScreenPosition(_:)
-  ~hitTestWithInfiniteHorizontalPlane(_:_:)
-  ~hitTestWithFeatures(_:coneOpeningAngleInDegrees:minDistance:maxDistance:maxResults:)
-  ~hitTestWithFeatures(_:) 
-}
-class "FocusSquare" as FocusSquare << (C, DarkSeaGreen) >> { 
-  ~{static} size : Float
-  ~{static} thickness : Float
-  ~{static} scaleForClosedSquare : Float
-  ~{static} sideLengthForOpenSegments : CGFloat
-  ~{static} animationDuration
-  ~{static} primaryColor
-  ~{static} fillColor
-  ~lastPosition : SIMD3<Float>?
-  ~state : State
-  -isOpen
-  -isAnimating
-  -recentFocusSquarePositions : [SIMD3<Float>]
-  -anchorsOfVisitedPlanes : Set<ARAnchor>
-  -segments : [FocusSquare.Segment]
-  -positioningNode
-  ~init()
-  ~init(coder:)
-  ~hide()
-  ~unhide()
-  -displayAsBillboard()
-  -displayAsOpen(at:camera:)
-  -displayAsClosed(at:planeAnchor:camera:)
-  -updateTransform(for:camera:)
-  -normalize(_:forMinimalRotationTo:)
-  -scaleBasedOnDistance(camera:)
-  -performOpenAnimation()
-  -performCloseAnimation(flash:)
-  -scaleAnimation(for:)
-  ~displayNodeHierarchyOnTop(_:)
-  -fillPlane : SCNNode 
-}
-class "SolarSystemPresentationLogic" as SolarSystemPresentationLogic << (P, GoldenRod) protocol >> {  
-}
-class "SolarSystemPresenter" as SolarSystemPresenter << (C, DarkSeaGreen) >> { 
-  ~viewController : SolarSystemDisplayLogic? 
-}
-class "Services" as Services << (E, LightSteelBlue) enum >> {  
-}
-class "ServicesRoutingLogic" as ServicesRoutingLogic << (P, GoldenRod) protocol >> {  
-}
-class "ServicesDataPassing" as ServicesDataPassing << (P, GoldenRod) protocol >> { 
-  ~dataStore : ServicesDataStore? 
-}
-class "ServicesRouter" as ServicesRouter << (C, DarkSeaGreen) >> { 
-  ~viewController : ServicesViewController?
-  ~dataStore : ServicesDataStore? 
-}
-class "ServicesDisplayLogic" as ServicesDisplayLogic3 << (P, GoldenRod) protocol >> { 
-  ~displaySomething(viewModel:) 
-}
-class "ServicesViewController" as ServicesViewController4 << (C, DarkSeaGreen) >> { 
-  ~tableview : UITableView
-  ~interactor : ServicesBusinessLogic?
-  ~router : (NSObjectProtocol & ServicesRoutingLogic & ServicesDataPassing)?
-  ~init(nibName:bundle:)
-  ~init(coder:)
-  -setup()
-  ~prepare(for:sender:)
-  ~viewDidLoad()
-  ~doSomething()
-  ~displaySomething(viewModel:) 
-}
-class "ServicesWorker" as ServicesWorker << (C, DarkSeaGreen) >> { 
-  ~doSomeWork() 
-}
-ApodBusinessLogic <|.. ApodInteractor : confirms to
-ApodDataStore <|.. ApodInteractor : confirms to
-AnyObject <|.. ApodDisplayLogic : inherits
-UIViewController <|-- ApodViewController : inherits
-ApodDisplayLogic <|.. ApodViewController : confirms to
-UIScrollViewDelegate <|-- ApodViewController : inherits
-MainVCDelegate <|-- ApodViewController : inherits
-NSObject <|-- ApodRouter : inherits
-ApodRoutingLogic <|.. ApodRouter : confirms to
-ApodDataPassing <|.. ApodRouter : confirms to
-UIScrollView <|-- ImageScrollView : inherits
-UIScrollViewDelegate <|-- ImageScrollView : inherits
-VerticalViewController <|-- DescriptionViewController : inherits
-UIViewController <|-- Description : inherits
-UINavigationController <|-- ContainerVC : inherits
-ApodPresentationLogic <|.. ApodPresenter : confirms to
-ServicesPresentationLogic <|.. ServicesPresenter : confirms to
-ServicesBusinessLogic <|.. ServicesInteractor : confirms to
-ServicesDataStore <|.. ServicesInteractor : confirms to
-UITableViewCell <|-- ServicesCell : inherits
-UITableViewCell <|-- ServicesCell : inherits
-AnyObject <|.. ServicesDisplayLogic : inherits
-VerticalViewController <|-- ServicesViewController : inherits
-ServicesDisplayLogic <|.. ServicesViewController : confirms to
-AnyObject <|.. ViewControllerDelegate : inherits
-ARSCNView <|-- SceneController : inherits
-ARSCNViewDelegate <|-- SceneController : inherits
-VerticalViewController <|-- NotchViewController : inherits
-AnyObject <|.. SceneControllerDelegate : inherits
-VerticalViewController <|-- SheetViewController : inherits
-SheetVcDelegate <|.. SheetViewController : confirms to
-VerticalViewController <|-- CustomViewController : inherits
-CustomLayoutDelegate <|-- CustomViewController : inherits
-UICollectionViewDelegate <|-- CustomViewController : inherits
-UICollectionViewDataSource <|-- CustomViewController : inherits
-UINavigationController <|-- ContainerViewController : inherits
-class <|.. ServicesArPlanetDisplayLogic : inherits
-UIViewController <|-- ServicesArPlanetViewController : inherits
-ServicesArPlanetDisplayLogic <|.. ServicesArPlanetViewController : confirms to
-ServicesArPlanetBusinessLogic <|.. ServicesArPlanetInteractor : confirms to
-ServicesArPlanetDataStore <|.. ServicesArPlanetInteractor : confirms to
-NSObject <|-- ServicesArPlanetRouter : inherits
-ServicesArPlanetRoutingLogic <|.. ServicesArPlanetRouter : confirms to
-ServicesArPlanetDataPassing <|.. ServicesArPlanetRouter : confirms to
-ServicesArPlanetPresentationLogic <|.. ServicesArPlanetPresenter : confirms to
-AnyObject <|.. ServicesArPlanetDisplayLogic : inherits
-UIViewController <|-- ServicesArPlanetViewController : inherits
-ServicesArPlanetDisplayLogic <|.. ServicesArPlanetViewController : confirms to
-ViewControllerDelegate <|.. ServicesArPlanetViewController : confirms to
-ARSCNViewDelegate <|-- ServicesArPlanetViewController : inherits
-SceneControllerDelegate <|.. ServicesArPlanetViewController : confirms to
-AnyObject <|.. SolarSystemDisplayLogic : inherits
-UIViewController <|-- SolarSystemViewController : inherits
-SolarSystemDisplayLogic <|.. SolarSystemViewController : confirms to
-NSObject <|-- SolarSystemRouter : inherits
-SolarSystemRoutingLogic <|.. SolarSystemRouter : confirms to
-SolarSystemDataPassing <|.. SolarSystemRouter : confirms to
-SolarSystemBusinessLogic <|.. SolarSystemInteractor : confirms to
-SolarSystemDataStore <|.. SolarSystemInteractor : confirms to
-NSObject <|-- VirtualObjectInteraction : inherits
-UIGestureRecognizerDelegate <|-- VirtualObjectInteraction : inherits
-UIPanGestureRecognizer <|-- ThresholdPanGesture : inherits
-SCNNode <|-- PlanetLoop : inherits
-SCNNode <|-- PlanetNode : inherits
-NSObject <|-- SolarPlanet : inherits
-ARSCNView <|-- VirtualObjectARView : inherits
-SCNNode <|-- FocusSquare : inherits
-SolarSystemPresentationLogic <|.. SolarSystemPresenter : confirms to
-NSObject <|-- ServicesRouter : inherits
-ServicesRoutingLogic <|.. ServicesRouter : confirms to
-ServicesDataPassing <|.. ServicesRouter : confirms to
-class <|.. ServicesDisplayLogic : inherits
-UIViewController <|-- ServicesViewController : inherits
-ServicesDisplayLogic <|.. ServicesViewController : confirms to
+NewsWebBrowserRoutingLogic <|.. NewsWebBrowserRouter
+NewsWebBrowserDataPassing <|.. NewsWebBrowserRouter
+NewsWebBrowserDisplayLogic <|.. NewsWebBrowserViewController
+NewsWebBrowserPresentationLogic <|.. NewsWebBrowserPresenter
+NewsWebBrowserBusinessLogic <|.. NewsWebBrowserInteractor
+NewsWebBrowserDataStore <|.. NewsWebBrowserInteractor
+NewsBusinessLogic <|.. NewsInteractor
+NewsDataStore <|.. NewsInteractor
+NewsWorkerLogic <|.. NewsWorker
+NewsRoutingLogic <|.. NewsRouter
+NewsDataPassing <|.. NewsRouter
+NewsPresentationLogic <|.. NewsPresenter
+NewsDisplayLogic <|.. NewsViewController
+UITableViewCell <|-- NewsCell
 
 @enduml

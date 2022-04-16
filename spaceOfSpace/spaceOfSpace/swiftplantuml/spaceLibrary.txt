@@ -1,0 +1,403 @@
+@startuml
+' STYLE START
+hide empty members
+skinparam sequenceMessageAlign center
+skinparam classFontSize 14
+' STYLE END
+
+
+class "SpaceLibraryCategoryDetailedBusinessLogic" as SpaceLibraryCategoryDetailedBusinessLogic << (P, AntiqueWhite) protocol >> { 
+  ~getArticles()
+  ~getTitle() 
+}
+class "SpaceLibraryCategoryDetailedDataStore" as SpaceLibraryCategoryDetailedDataStore << (P, AntiqueWhite) protocol >> { 
+  ~title : String
+  ~articleTitles : [String]?
+  ~articles : [SpaceLibraryArticle?] 
+}
+class "SpaceLibraryCategoryDetailedInteractor" as SpaceLibraryCategoryDetailedInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : SpaceLibraryCategoryDetailedPresentationLogic?
+  ~worker : SpaceLibraryCategoryDetailedWorker?
+  ~title : String
+  ~articleTitles : [String]?
+  ~articles : [SpaceLibraryArticle?]
+  ~getArticles()
+  ~getTitle() 
+}
+class "SpaceLibraryCategoryDetailedModel" as SpaceLibraryCategoryDetailedModel << (E, AntiqueWhite) enum >> {  
+}
+class "SpaceLibraryCategoryDetailedRoutingLogic" as SpaceLibraryCategoryDetailedRoutingLogic << (P, AntiqueWhite) protocol >> { 
+  ~routeToArticle() 
+}
+class "SpaceLibraryCategoryDetailedDataPassing" as SpaceLibraryCategoryDetailedDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : SpaceLibraryCategoryDetailedDataStore? 
+}
+class "SpaceLibraryCategoryDetailedRouter" as SpaceLibraryCategoryDetailedRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryCategoryDetailedViewController?
+  ~dataStore : SpaceLibraryCategoryDetailedDataStore?
+  ~routeToArticle()
+  ~passDataToArticleVC(source:destination:) 
+}
+class "SpaceLibraryCategoryDetailedWorker" as SpaceLibraryCategoryDetailedWorker << (C, AntiqueWhite) class >> { 
+  ~articlesManager
+  ~fetch(articleTitles:success:) 
+}
+class "SpaceLibraryCategoryDetailedDisplayLogic" as SpaceLibraryCategoryDetailedDisplayLogic << (P, AntiqueWhite) protocol >> { 
+  ~displayTableItems(viewModel:)
+  ~updateTitle(title:) 
+}
+class "SpaceLibraryCategoryDetailedViewController" as SpaceLibraryCategoryDetailedViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : SpaceLibraryCategoryDetailedBusinessLogic?
+  ~router : (NSObjectProtocol & SpaceLibraryCategoryDetailedRoutingLogic & SpaceLibraryCategoryDetailedDataPassing)?
+  -displayedItems : [SpaceLibraryArticle]?
+  -{static} rowHeight : CGFloat
+  ~spinnerView
+  ~spinnerFooterView
+  ~init(nibName:bundle:)
+  ~init(coder:)
+  ~tableView : UITableView
+  -setup()
+  -setupUI()
+  -createSpinnerFooter()
+  ~viewDidLoad()
+  ~displayTableItems(viewModel:)
+  ~updateTitle(title:) 
+}
+class "ArticleItem" as ArticleItem << (C, AntiqueWhite) class >> { 
+  ~{static} identifier : String
+  ~articleTitle
+  ~articleImage
+  ~init(style:reuseIdentifier:)
+  ~init(coder:)
+  ~setupItem()
+  ~setupAutoLayout() 
+}
+class "SpaceLibraryCategoryDetailedPresentationLogic" as SpaceLibraryCategoryDetailedPresentationLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentArticles(response:)
+  ~setTitle(title:) 
+}
+class "SpaceLibraryCategoryDetailedPresenter" as SpaceLibraryCategoryDetailedPresenter << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryCategoryDetailedDisplayLogic?
+  ~presentArticles(response:)
+  ~setTitle(title:) 
+}
+class "SpaceLibraryCategoriesModel" as SpaceLibraryCategoriesModel << (E, AntiqueWhite) enum >> {  
+}
+class "SpaceLibraryCategoriesWorker" as SpaceLibraryCategoriesWorker << (C, AntiqueWhite) class >> { 
+  ~getCategories() 
+}
+class "SpaceLibraryCategoriesBusinessLogic" as SpaceLibraryCategoriesBusinessLogic << (P, AntiqueWhite) protocol >> { 
+  ~getCategories(request:) 
+}
+class "SpaceLibraryCategoriesDataStore" as SpaceLibraryCategoriesDataStore << (P, AntiqueWhite) protocol >> { 
+  ~categories : [SpaceLibraryCategory] 
+}
+class "SpaceLibraryCategoriesInteractor" as SpaceLibraryCategoriesInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : SpaceLibraryCategoriesPresentationLogic?
+  ~worker : SpaceLibraryCategoriesWorker?
+  ~categories : [SpaceLibraryCategory]
+  ~getCategories(request:) 
+}
+class "SpaceLibraryCategoriesRoutingLogic" as SpaceLibraryCategoriesRoutingLogic << (P, AntiqueWhite) protocol >> { 
+  ~routeToCategoryDetailed() 
+}
+class "SpaceLibraryCategoriesDataPassing" as SpaceLibraryCategoriesDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : SpaceLibraryCategoriesDataStore? 
+}
+class "SpaceLibraryCategoriesRouter" as SpaceLibraryCategoriesRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryCategoriesViewController?
+  ~dataStore : SpaceLibraryCategoriesDataStore?
+  ~routeToCategoryDetailed()
+  ~passDataToCategoryDetailedVC(source:destination:) 
+}
+class "SpaceLibraryCategoriesDisplayLogic" as SpaceLibraryCategoriesDisplayLogic << (P, AntiqueWhite) protocol >> { 
+  ~displayCollectionItems(viewModel:) 
+}
+class "SpaceLibraryCategoriesViewController" as SpaceLibraryCategoriesViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : SpaceLibraryCategoriesBusinessLogic?
+  ~router : (NSObjectProtocol & SpaceLibraryCategoriesRoutingLogic & SpaceLibraryCategoriesDataPassing)?
+  -displayedItems : [SpaceLibraryCategory]?
+  -{static} itemPadding : CGFloat
+  -{static} smallItemHeight : CGFloat
+  -{static} bigItemHeight : CGFloat
+  ~init(nibName:bundle:)
+  ~init(coder:)
+  ~collectionView : UICollectionView
+  -setup()
+  -setupUI()
+  ~viewDidLoad()
+  ~displayCollectionItems(viewModel:) 
+}
+class "CategoryItem" as CategoryItem << (C, AntiqueWhite) class >> { 
+  ~{static} identifier : String
+  ~categoryTitle
+  ~categoryImage
+  ~mainView
+  ~init(frame:)
+  ~init(coder:)
+  ~setupItem()
+  ~setupAutoLayout() 
+}
+class "SpaceLibraryCategoriesPresentationLogic" as SpaceLibraryCategoriesPresentationLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentCategories(response:) 
+}
+class "SpaceLibraryCategoriesPresenter" as SpaceLibraryCategoriesPresenter << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryCategoriesDisplayLogic?
+  ~presentCategories(response:) 
+}
+class "SpaceLibraryArticleModel" as SpaceLibraryArticleModel << (E, AntiqueWhite) enum >> {  
+}
+class "SpaceLibraryArticlePresentationLogic" as SpaceLibraryArticlePresentationLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentArticle(response:)
+  ~setTitle(title:)
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticlePresenter" as SpaceLibraryArticlePresenter << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryArticleDisplayLogic?
+  ~presentArticle(response:)
+  ~setTitle(title:)
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticleWorker" as SpaceLibraryArticleWorker << (C, AntiqueWhite) class >> { 
+  ~articlesManager
+  ~fetch(articleTitle:success:)
+  ~doSomeWork() 
+}
+class "SpaceLibraryArticleRoutingLogic" as SpaceLibraryArticleRoutingLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentToc() 
+}
+class "SpaceLibraryArticleDataPassing" as SpaceLibraryArticleDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : SpaceLibraryArticleDataStore? 
+}
+class "SpaceLibraryArticleRouter" as SpaceLibraryArticleRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryArticleViewController?
+  ~dataStore : SpaceLibraryArticleDataStore?
+  ~presentToc()
+  ~passDataToToc(source:destination:) 
+}
+class "SpaceLibraryArticleDisplayLogic" as SpaceLibraryArticleDisplayLogic << (P, AntiqueWhite) protocol >> { 
+  ~displayBackgroundImage(viewModel:)
+  ~displayArticles(viewModel:)
+  ~updateTitle(title:)
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticleViewController" as SpaceLibraryArticleViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : SpaceLibraryArticleBusinessLogic?
+  ~router : (NSObjectProtocol & SpaceLibraryArticleRoutingLogic & SpaceLibraryArticleDataPassing)?
+  ~backgroundImage
+  ~scrollView
+  ~articleView
+  ~citationLabel
+  ~botAnchor
+  ~init(nibName:bundle:)
+  ~init(coder:)
+  -setup()
+  -setupUI()
+  ~addArticleSection(text:)
+  ~addArticleTitle(text:level:)
+  ~viewDidLoad()
+  -tocButtonTapped()
+  ~updateTitle(title:)
+  ~displayBackgroundImage(viewModel:)
+  ~displayArticles(viewModel:)
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticleBusinessLogic" as SpaceLibraryArticleBusinessLogic << (P, AntiqueWhite) protocol >> { 
+  ~getTitle()
+  ~getArticleText()
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticleDataStore" as SpaceLibraryArticleDataStore << (P, AntiqueWhite) protocol >> { 
+  ~title : String
+  ~article : SpaceLibraryArticle? 
+}
+class "SpaceLibraryArticleInteractor" as SpaceLibraryArticleInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : SpaceLibraryArticlePresentationLogic?
+  ~worker : SpaceLibraryArticleWorker?
+  ~title : String
+  ~article : SpaceLibraryArticle?
+  ~getTitle()
+  ~getArticleText()
+  ~goToSection(sectionTitle:)
+  ~parseArticleText(text:) 
+}
+class "SpaceLibraryArticleModel" as SpaceLibraryArticleModel0 << (E, AntiqueWhite) enum >> {  
+}
+class "SpaceLibraryArticlePresentationLogic" as SpaceLibraryArticlePresentationLogic1 << (P, AntiqueWhite) protocol >> { 
+  ~presentArticle(response:)
+  ~setTitle(title:)
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticlePresenter" as SpaceLibraryArticlePresenter2 << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryArticleDisplayLogic?
+  ~presentArticle(response:)
+  ~setTitle(title:)
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticleWorker" as SpaceLibraryArticleWorker3 << (C, AntiqueWhite) class >> { 
+  ~articlesManager
+  ~fetch(articleTitle:success:)
+  ~doSomeWork() 
+}
+class "SpaceLibraryArticleRoutingLogic" as SpaceLibraryArticleRoutingLogic4 << (P, AntiqueWhite) protocol >> { 
+  ~presentToc() 
+}
+class "SpaceLibraryArticleDataPassing" as SpaceLibraryArticleDataPassing5 << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : SpaceLibraryArticleDataStore? 
+}
+class "SpaceLibraryArticleRouter" as SpaceLibraryArticleRouter6 << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryArticleViewController?
+  ~dataStore : SpaceLibraryArticleDataStore?
+  ~presentToc()
+  ~passDataToToc(source:destination:) 
+}
+class "SpaceLibraryArticleDisplayLogic" as SpaceLibraryArticleDisplayLogic7 << (P, AntiqueWhite) protocol >> { 
+  ~displayBackgroundImage(viewModel:)
+  ~displayArticles(viewModel:)
+  ~updateTitle(title:)
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticleViewController" as SpaceLibraryArticleViewController8 << (C, AntiqueWhite) class >> { 
+  ~interactor : SpaceLibraryArticleBusinessLogic?
+  ~router : (NSObjectProtocol & SpaceLibraryArticleRoutingLogic & SpaceLibraryArticleDataPassing)?
+  ~backgroundImage
+  ~scrollView
+  ~articleView
+  ~citationLabel
+  ~spinnerView
+  ~spinnerFooterView
+  ~botAnchor
+  ~init(nibName:bundle:)
+  ~init(coder:)
+  -setup()
+  -setupUI()
+  -createSpinnerFooter()
+  ~addCitationLabel()
+  ~addArticleSection(text:)
+  ~addArticleTitle(text:level:)
+  ~viewDidLoad()
+  -tocButtonTapped()
+  ~updateTitle(title:)
+  ~displayBackgroundImage(viewModel:)
+  ~displayArticles(viewModel:)
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticleBusinessLogic" as SpaceLibraryArticleBusinessLogic9 << (P, AntiqueWhite) protocol >> { 
+  ~getTitle()
+  ~getArticleText()
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryArticleDataStore" as SpaceLibraryArticleDataStore10 << (P, AntiqueWhite) protocol >> { 
+  ~title : String
+  ~article : SpaceLibraryArticle? 
+}
+class "SpaceLibraryArticleInteractor" as SpaceLibraryArticleInteractor11 << (C, AntiqueWhite) class >> { 
+  ~presenter : SpaceLibraryArticlePresentationLogic?
+  ~worker : SpaceLibraryArticleWorker?
+  ~title : String
+  ~article : SpaceLibraryArticle?
+  ~getTitle()
+  ~getArticleText()
+  ~goToSection(sectionTitle:)
+  ~parseArticleText(text:) 
+}
+class "SpaceLibraryTableOfContentsDisplayLogic" as SpaceLibraryTableOfContentsDisplayLogic << (P, AntiqueWhite) protocol >> { 
+  ~displayTitles(sections:) 
+}
+class "SpaceLibraryTableOfContentsViewController" as SpaceLibraryTableOfContentsViewController << (C, AntiqueWhite) class >> { 
+  ~interactor : SpaceLibraryTableOfContentsBusinessLogic?
+  ~router : (NSObjectProtocol & SpaceLibraryTableOfContentsRoutingLogic & SpaceLibraryTableOfContentsDataPassing)?
+  -displayedItems : [SpaceLibraryArticleSection]?
+  ~init(nibName:bundle:)
+  ~init(coder:)
+  ~tableView : UITableView
+  -setup()
+  -setupUI()
+  ~prepare(for:sender:)
+  ~viewDidLoad()
+  ~getArticle()
+  ~displayTitles(sections:) 
+}
+class "SpaceLibraryTableOfContentsWorker" as SpaceLibraryTableOfContentsWorker << (C, AntiqueWhite) class >> { 
+  ~doSomeWork() 
+}
+class "SpaceLibraryTableOfContentsBusinessLogic" as SpaceLibraryTableOfContentsBusinessLogic << (P, AntiqueWhite) protocol >> { 
+  ~articleBusinessLogicDelegate : SpaceLibraryArticleBusinessLogic?
+  ~getArticle()
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryTableOfContentsDataStore" as SpaceLibraryTableOfContentsDataStore << (P, AntiqueWhite) protocol >> { 
+  ~article : SpaceLibraryArticle? 
+}
+class "SpaceLibraryTableOfContentsInteractor" as SpaceLibraryTableOfContentsInteractor << (C, AntiqueWhite) class >> { 
+  ~presenter : SpaceLibraryTableOfContentsPresentationLogic?
+  ~worker : SpaceLibraryTableOfContentsWorker?
+  ~article : SpaceLibraryArticle?
+  ~articleBusinessLogicDelegate : SpaceLibraryArticleBusinessLogic?
+  ~getArticle()
+  ~goToSection(sectionTitle:) 
+}
+class "SpaceLibraryTableOfContentsRoutingLogic" as SpaceLibraryTableOfContentsRoutingLogic << (P, AntiqueWhite) protocol >> {  
+}
+class "SpaceLibraryTableOfContentsDataPassing" as SpaceLibraryTableOfContentsDataPassing << (P, AntiqueWhite) protocol >> { 
+  ~dataStore : SpaceLibraryTableOfContentsDataStore? 
+}
+class "SpaceLibraryTableOfContentsRouter" as SpaceLibraryTableOfContentsRouter << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryTableOfContentsViewController?
+  ~dataStore : SpaceLibraryTableOfContentsDataStore? 
+}
+class "SpaceLibraryTableOfContents" as SpaceLibraryTableOfContents << (E, AntiqueWhite) enum >> {  
+}
+class "SpaceLibraryTableOfContentsPresentationLogic" as SpaceLibraryTableOfContentsPresentationLogic << (P, AntiqueWhite) protocol >> { 
+  ~presentTitles(sections:) 
+}
+class "SpaceLibraryTableOfContentsPresenter" as SpaceLibraryTableOfContentsPresenter << (C, AntiqueWhite) class >> { 
+  ~viewController : SpaceLibraryTableOfContentsDisplayLogic?
+  ~presentTitles(sections:) 
+}
+class "TitleItem" as TitleItem << (C, AntiqueWhite) class >> { 
+  ~{static} identifier : String
+  ~leadingConstraint : NSLayoutConstraint?
+  ~articleTitle
+  ~init(style:reuseIdentifier:)
+  ~init(coder:)
+  ~setupItem()
+  ~setupAutoLayout()
+  ~setupLevel(level:) 
+}
+SpaceLibraryCategoryDetailedBusinessLogic <|.. SpaceLibraryCategoryDetailedInteractor
+SpaceLibraryCategoryDetailedDataStore <|.. SpaceLibraryCategoryDetailedInteractor
+SpaceLibraryCategoryDetailedRoutingLogic <|.. SpaceLibraryCategoryDetailedRouter
+SpaceLibraryCategoryDetailedDataPassing <|.. SpaceLibraryCategoryDetailedRouter
+SpaceLibraryCategoryDetailedDisplayLogic <|.. SpaceLibraryCategoryDetailedViewController
+UITableViewCell <|-- ArticleItem
+SpaceLibraryCategoryDetailedPresentationLogic <|.. SpaceLibraryCategoryDetailedPresenter
+SpaceLibraryCategoriesBusinessLogic <|.. SpaceLibraryCategoriesInteractor
+SpaceLibraryCategoriesDataStore <|.. SpaceLibraryCategoriesInteractor
+SpaceLibraryCategoriesRoutingLogic <|.. SpaceLibraryCategoriesRouter
+SpaceLibraryCategoriesDataPassing <|.. SpaceLibraryCategoriesRouter
+SpaceLibraryCategoriesDisplayLogic <|.. SpaceLibraryCategoriesViewController
+UICollectionViewCell <|-- CategoryItem
+SpaceLibraryCategoriesPresentationLogic <|.. SpaceLibraryCategoriesPresenter
+SpaceLibraryArticlePresentationLogic <|.. SpaceLibraryArticlePresenter
+SpaceLibraryArticleRoutingLogic <|.. SpaceLibraryArticleRouter
+SpaceLibraryArticleDataPassing <|.. SpaceLibraryArticleRouter
+SpaceLibraryArticleDisplayLogic <|.. SpaceLibraryArticleViewController
+SpaceLibraryArticleBusinessLogic <|.. SpaceLibraryArticleInteractor
+SpaceLibraryArticleDataStore <|.. SpaceLibraryArticleInteractor
+SpaceLibraryArticlePresentationLogic <|.. SpaceLibraryArticlePresenter
+SpaceLibraryArticleRoutingLogic <|.. SpaceLibraryArticleRouter
+SpaceLibraryArticleDataPassing <|.. SpaceLibraryArticleRouter
+SpaceLibraryArticleDisplayLogic <|.. SpaceLibraryArticleViewController
+SpaceLibraryArticleBusinessLogic <|.. SpaceLibraryArticleInteractor
+SpaceLibraryArticleDataStore <|.. SpaceLibraryArticleInteractor
+UIViewController <|-- SpaceLibraryTableOfContentsViewController
+SpaceLibraryTableOfContentsDisplayLogic <|.. SpaceLibraryTableOfContentsViewController
+SpaceLibraryTableOfContentsBusinessLogic <|.. SpaceLibraryTableOfContentsInteractor
+SpaceLibraryTableOfContentsDataStore <|.. SpaceLibraryTableOfContentsInteractor
+SpaceLibraryTableOfContentsRoutingLogic <|.. SpaceLibraryTableOfContentsRouter
+SpaceLibraryTableOfContentsDataPassing <|.. SpaceLibraryTableOfContentsRouter
+SpaceLibraryTableOfContentsPresentationLogic <|.. SpaceLibraryTableOfContentsPresenter
+UITableViewCell <|-- TitleItem
+
+@enduml
